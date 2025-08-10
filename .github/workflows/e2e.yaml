@@ -58,6 +58,12 @@ jobs:
       - name: Add GCS to /etc/hosts
         run: echo "127.0.0.1 gcs" | sudo tee -a /etc/hosts
 
+      - name: Boot API Server
+        working-directory: ./api-server
+        run: |
+          rm -f tmp/pids/server.pid
+          bundle exec rails s -p 4000 -b '0.0.0.0' &
+
       - name: migrate
         working-directory: ./api-server
         run: rails ridgepole:apply
@@ -65,12 +71,6 @@ jobs:
       # - name: Seeding
       #   working-directory: ./api-server
       #   run: make test-seed-ci
-
-      - name: Boot API Server
-        working-directory: ./api-server
-        run: |
-          rm -f tmp/pids/server.pid
-          bundle exec rails s -p 4000 -b '0.0.0.0' &
 
       - uses: awalsh128/cache-apt-pkgs-action@4c82c3ccdc1344ee11e9775dbdbdf43aa8a5614e # v1.5.1
         with:
