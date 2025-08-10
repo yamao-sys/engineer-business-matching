@@ -1,0 +1,203 @@
+openapi: 3.1.0
+info:
+  title: Business Service
+  version: '1.0'
+  description: business APIs
+tags:
+  - name: companies
+  - name: csrf
+paths:
+  /companies/sign-in:
+    post:
+      operationId: post-company-sign-in
+      summary: Company Sign In
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySignInOkResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySignInBadRequestResponse'
+        '500':
+          description: Server error
+      tags:
+        - companies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanySignInInput'
+  /companies/sign-up:
+    post:
+      operationId: post-company-sign-up
+      summary: Company Sign Up
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySignUpResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySignUpResponse'
+        '500':
+          description: Server error
+      tags:
+        - companies
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanySignUpInput'
+  /companies/validate-sign-up:
+    post:
+      operationId: post-company-validate-sign-up
+      summary: Company Validate Sign Up
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySignUpResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySignUpResponse'
+        '500':
+          description: Server error
+      tags:
+        - companies
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanySignUpInput'
+  /csrf:
+    get:
+      operationId: get-csrf
+      summary: Get Csrf
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsrfResponse'
+        '500':
+          description: Server error
+      tags:
+        - csrf
+components:
+  schemas:
+    CompanySignInBadRequestResponse:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+      title: Company SignIn BadRequestError Response
+    CompanySignInInput:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      title: Company SignIn Input
+    CompanySignInOkResponse:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+      title: Company SignIn Ok Response
+    CompanySignUpInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        finalTaxReturn:
+          type: string
+          format: binary
+      required:
+        - name
+        - email
+        - password
+    CompanySignUpResponse:
+      type: object
+      required:
+        - code
+        - errors
+      properties:
+        code:
+          type: integer
+        errors:
+          $ref: '#/components/schemas/CompanySignUpValidationError'
+      title: Company SignUp Response
+    CompanySignUpValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        email:
+          type: array
+          items:
+            type: string
+        password:
+          type: array
+          items:
+            type: string
+        finalTaxReturn:
+          type: array
+          items:
+            type: string
+      title: Company SignUp Validation Error
+    CsrfResponse:
+      type: object
+      required:
+        - csrfToken
+      properties:
+        csrfToken:
+          type: string
+      title: CsrfResponse
+servers:
+  - url: https://localhost:4000
+    variables: {}

@@ -20,6 +20,15 @@
     "test:e2e": {
       "dependsOn": ["^build"],
       "passThroughEnv": ["PLAYWRIGHT_*"]
+    },
+    "gen:api-spec": {
+      "dependsOn": ["^gen:api-spec"]
+    },
+    "gen:api-spec:watch": {
+      "dependsOn": ["^gen:api-spec:watch"]
+    },
+    "diff:api-spec:check": {
+      "dependsOn": ["^diff:api-spec:check"]
     }
   }
 }

@@ -10,7 +10,10 @@
     "lint": "next lint --max-warnings 0",
     "check-types": "tsc --noEmit",
     "dev:test": "NODE_ENV=test next dev --turbopack --port 3100",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "gen:api-spec": "cd api-spec && npx tsp compile . && node patch.mjs && cd ..",
+    "gen:api-spec:watch": "SHELL=/usr/bin/sh chokidar 'api-spec/**/*.tsp' -c 'pnpm gen:api-spec'",
+    "diff:api-spec:check": "pnpm gen:api-spec && git add api-spec/tsp-output/schema/openapi.yaml && git diff --staged --quiet || (echo 'tspとyamlの変更が同期されていません' && exit 1)"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
@@ -22,6 +25,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@repo/playwright-config": "workspace:*",
+    "@repo/api-spec": "workspace:*",
     "@types/node": "^22.15.3",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",
