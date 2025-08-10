@@ -25,7 +25,7 @@ jobs:
 
       - name: Copy env file
         working-directory: api-server
-        run: cp .env.sample .env
+        run: cp .env.test .env
 
       # 必要なGemのインストール
       - name: Install dependencies
