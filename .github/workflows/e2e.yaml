@@ -41,22 +41,20 @@ jobs:
         working-directory: api-server
         run: bundle install
 
-      - name: Prepare storage directory
-        working-directory: ./api-server
-        run: mkdir data/ && mkdir data/engineer_business_matching_test
-
-      - name: Set up google cloud server
-        uses: fsouza/fake-gcs-action@920951b8eff0a80dab4b391b39bec79f8bd92537 # v0.4.1
+      - name: Start LocalStack
+        uses: LocalStack/setup-localstack@7bc0b195ea4bef7a215f1ec0f71e41fedc6f0e15 # v0.2.2
         with:
-          version: "1.37.2"
-          backend: memory
-          data: "./api-server/data"
-          public-host: "gcs:4443"
-          external-url: "http://gcs:4443"
-          scheme: http
+          install-awslocal: "true"
 
-      - name: Add GCS to /etc/hosts
-        run: echo "127.0.0.1 gcs" | sudo tee -a /etc/hosts
+      - name: Configure AWS CLI
+        run: |
+          aws configure set aws_access_key_id dummy
+          aws configure set aws_secret_access_key dummy
+          aws configure set region ap-northeast-1
+
+      - name: Make Test Bucket on LocalStack
+        run: |
+          awslocal s3 mb s3://engineer-business-matching-test
 
       - name: Boot API Server
         working-directory: ./api-server
