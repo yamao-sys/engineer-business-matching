@@ -28,15 +28,17 @@ services:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./mysql:/var/lib/mysql
 
-  gcs:
-    image: fsouza/fake-gcs-server
-    tty: true
+  localstack:
+    image: localstack/localstack
     ports:
-      - 4443:4443
+      - 8080:8080 # dashboard
+      - 4566:4566 # edge port
+    environment:
+      SERVICES: s3
+      AWS_DEFAULT_REGION: ap-northeast-1
+      PERSISTENCE: 1
     volumes:
-      - ./.data:/data/engineer_business_matching_dev
-      - ./.storage:/storage
-    command: -scheme http -public-host ${URL:-localhost}:4443 -external-url http://${URL:-gcs}:4443 -port-http 8000
+      - ./docker/localstack/:/etc/localstack/init/ready.d
 
   frontend:
     build:
