@@ -11,7 +11,8 @@
     "test:e2e": "turbo run test:e2e",
     "gen:api-spec": "turbo run gen:api-spec",
     "gen:api-spec:watch": "turbo run gen:api-spec:watch",
-    "diff:api-spec:check": "turbo run diff:api-spec:check"
+    "diff:api-spec:check": "turbo run diff:api-spec:check",
+    "gen:client": "turbo run gen:client"
   },
   "devDependencies": {
     "@playwright/test": "^1.50.1",
@@ -25,6 +26,7 @@
     "autoprefixer": "^10.4.21",
     "chokidar-cli": "^3.0.0",
     "js-yaml": "^4.1.0",
+    "orval": "^7.11.2",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
@@ -35,5 +37,9 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.84.2",
+    "react-hook-form": "^7.62.0"
   }
 }
