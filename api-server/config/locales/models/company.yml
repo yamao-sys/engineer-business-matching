@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      company: 企業
+    attributes:
+      company:
+        name: 企業名
+        email: メールアドレス
+        password: パスワード
+        final_tax_return: 確定申告書
