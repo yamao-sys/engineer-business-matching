@@ -53,3 +53,10 @@ group :development, :test do
 end
 
 gem "ridgepole"
+
+gem "shrine"
+gem "aws-sdk-s3"
+
+gem "rails-i18n"
+
+gem "bcrypt"
