@@ -30,7 +30,6 @@ model CompanySignUpInput {
 
 @summary("Company SignUp Response")
 model CompanySignUpResponse {
-  code: integer;
   errors: CompanySignUpValidationError;
 }
 

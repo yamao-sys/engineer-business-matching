@@ -162,11 +162,8 @@ components:
     CompanySignUpResponse:
       type: object
       required:
-        - code
         - errors
       properties:
-        code:
-          type: integer
         errors:
           $ref: '#/components/schemas/CompanySignUpValidationError'
       title: Company SignUp Response
