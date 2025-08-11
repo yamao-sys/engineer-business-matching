@@ -17,6 +17,7 @@ import type {
 } from ".././model";
 
 import { customFetch } from "../../../../packages/orval-config/custom-fetch";
+import { customFormData } from "../../../../packages/orval-config/custom-form-data";
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
@@ -121,14 +122,7 @@ export const getPostCompanySignUpUrl = () => {
 };
 
 export const postCompanySignUp = async (companySignUpInput: CompanySignUpInput, options?: RequestInit): Promise<postCompanySignUpResponse> => {
-  const formData = new FormData();
-  formData.append(`name`, companySignUpInput.name);
-  formData.append(`email`, companySignUpInput.email);
-  formData.append(`password`, companySignUpInput.password);
-  if (companySignUpInput.finalTaxReturn !== undefined) {
-    formData.append(`finalTaxReturn`, companySignUpInput.finalTaxReturn);
-  }
-
+  const formData = customFormData(companySignUpInput);
   return customFetch<postCompanySignUpResponse>(getPostCompanySignUpUrl(), {
     ...options,
     method: "POST",
@@ -206,14 +200,7 @@ export const postCompanyValidateSignUp = async (
   companySignUpInput: CompanySignUpInput,
   options?: RequestInit,
 ): Promise<postCompanyValidateSignUpResponse> => {
-  const formData = new FormData();
-  formData.append(`name`, companySignUpInput.name);
-  formData.append(`email`, companySignUpInput.email);
-  formData.append(`password`, companySignUpInput.password);
-  if (companySignUpInput.finalTaxReturn !== undefined) {
-    formData.append(`finalTaxReturn`, companySignUpInput.finalTaxReturn);
-  }
-
+  const formData = customFormData(companySignUpInput);
   return customFetch<postCompanyValidateSignUpResponse>(getPostCompanyValidateSignUpUrl(), {
     ...options,
     method: "POST",

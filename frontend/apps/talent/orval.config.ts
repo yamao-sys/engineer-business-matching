@@ -13,6 +13,10 @@ const config = {
           path: "../../packages/orval-config/custom-fetch.ts",
           name: "customFetch",
         },
+        formData: {
+          path: "../../packages/orval-config/custom-form-data.ts",
+          name: "customFormData",
+        },
       },
     },
     hooks: {

@@ -12,6 +12,10 @@ export const baseConfig = {
           path: "./custom-fetch.ts",
           name: "customFetch",
         },
+        formData: {
+          path: "./custom-form-data.ts",
+          name: "customFormData",
+        },
         useDates: true,
       },
     },

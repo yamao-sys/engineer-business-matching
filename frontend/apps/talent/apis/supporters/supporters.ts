@@ -17,6 +17,7 @@ import type {
 } from ".././model";
 
 import { customFetch } from "../../../../packages/orval-config/custom-fetch";
+import { customFormData } from "../../../../packages/orval-config/custom-form-data";
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
@@ -127,21 +128,7 @@ export const postSupporterSignUp = async (
   supporterSignUpInput: SupporterSignUpInput,
   options?: RequestInit,
 ): Promise<postSupporterSignUpResponse> => {
-  const formData = new FormData();
-  formData.append(`firstName`, supporterSignUpInput.firstName);
-  formData.append(`lastName`, supporterSignUpInput.lastName);
-  formData.append(`email`, supporterSignUpInput.email);
-  formData.append(`password`, supporterSignUpInput.password);
-  if (supporterSignUpInput.birthday !== undefined) {
-    formData.append(`birthday`, supporterSignUpInput.birthday);
-  }
-  if (supporterSignUpInput.frontIdentification !== undefined) {
-    formData.append(`frontIdentification`, supporterSignUpInput.frontIdentification);
-  }
-  if (supporterSignUpInput.backIdentification !== undefined) {
-    formData.append(`backIdentification`, supporterSignUpInput.backIdentification);
-  }
-
+  const formData = customFormData(supporterSignUpInput);
   return customFetch<postSupporterSignUpResponse>(getPostSupporterSignUpUrl(), {
     ...options,
     method: "POST",
@@ -219,21 +206,7 @@ export const postSupporterValidateSignUp = async (
   supporterSignUpInput: SupporterSignUpInput,
   options?: RequestInit,
 ): Promise<postSupporterValidateSignUpResponse> => {
-  const formData = new FormData();
-  formData.append(`firstName`, supporterSignUpInput.firstName);
-  formData.append(`lastName`, supporterSignUpInput.lastName);
-  formData.append(`email`, supporterSignUpInput.email);
-  formData.append(`password`, supporterSignUpInput.password);
-  if (supporterSignUpInput.birthday !== undefined) {
-    formData.append(`birthday`, supporterSignUpInput.birthday);
-  }
-  if (supporterSignUpInput.frontIdentification !== undefined) {
-    formData.append(`frontIdentification`, supporterSignUpInput.frontIdentification);
-  }
-  if (supporterSignUpInput.backIdentification !== undefined) {
-    formData.append(`backIdentification`, supporterSignUpInput.backIdentification);
-  }
-
+  const formData = customFormData(supporterSignUpInput);
   return customFetch<postSupporterValidateSignUpResponse>(getPostSupporterValidateSignUpUrl(), {
     ...options,
     method: "POST",
