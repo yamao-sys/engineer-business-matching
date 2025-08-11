@@ -29,6 +29,9 @@
     },
     "diff:api-spec:check": {
       "dependsOn": ["^diff:api-spec:check"]
+    },
+    "gen:client": {
+      "dependsOn": ["^gen:client"]
     }
   }
 }
