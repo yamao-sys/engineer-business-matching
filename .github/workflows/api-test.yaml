@@ -51,12 +51,8 @@ jobs:
         with:
           ruby-version: 3.4
           bundler-cache: true
-
-      # NOTE: 必要なGemのインストール
-      - name: Install dependencies
-        working-directory: api-server
-        run: bundle install
+          working-directory: api-server
 
       - name: Run Tests
         working-directory: api-server
-        run: RAILS_ENV=test rspec
+        run: RAILS_ENV=test bundle exec rspec

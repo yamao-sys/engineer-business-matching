@@ -31,11 +31,7 @@ jobs:
         with:
           ruby-version: 3.4
           bundler-cache: true
-
-      # 必要なGemのインストール
-      - name: Install dependencies
-        working-directory: api-server
-        run: bundle install
+          working-directory: api-server
 
       - name: Start LocalStack
         uses: LocalStack/setup-localstack@7bc0b195ea4bef7a215f1ec0f71e41fedc6f0e15 # v0.2.2
@@ -60,7 +56,7 @@ jobs:
 
       - name: migrate
         working-directory: ./api-server
-        run: RAILS_ENV=test rails ridgepole:apply
+        run: RAILS_ENV=test bundle exec rails ridgepole:apply
 
       # - name: Seeding
       #   working-directory: ./api-server
