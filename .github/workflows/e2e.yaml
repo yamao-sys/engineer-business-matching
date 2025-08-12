@@ -56,7 +56,7 @@ jobs:
 
       - name: migrate
         working-directory: ./api-server
-        run: RAILS_ENV=test rails ridgepole:apply
+        run: RAILS_ENV=test bundle exec rails ridgepole:apply
 
       # - name: Seeding
       #   working-directory: ./api-server
