@@ -6,7 +6,7 @@ RSpec.describe Api::V1::Business::CompaniesController, type: :request do
   describe "POST #validate_sign_up" do
     include_context "with files"
 
-    let(:params) { { name:, email:, password:, final_tax_return: } }
+    let(:params) { { name:, email:, password:, finalTaxReturn: } }
 
     subject { post validate_sign_up_api_v1_business_companies_url, params: }
 
@@ -14,7 +14,7 @@ RSpec.describe Api::V1::Business::CompaniesController, type: :request do
       let(:name) { "test" }
       let(:email) { "test@example.com" }
       let(:password) { "password" }
-      let(:final_tax_return) { sample_jpg_file }
+      let(:finalTaxReturn) { sample_jpg_file }
 
       it "returns 200" do
         aggregate_failures do
@@ -31,7 +31,7 @@ RSpec.describe Api::V1::Business::CompaniesController, type: :request do
         let(:name) { "" }
         let(:email) { "test@example.com" }
         let(:password) { "password" }
-        let(:final_tax_return) { sample_jpg_file }
+        let(:finalTaxReturn) { sample_jpg_file }
 
         it "returns 400" do
           aggregate_failures do
@@ -49,7 +49,7 @@ RSpec.describe Api::V1::Business::CompaniesController, type: :request do
   describe "POST #sign_up" do
     include_context "with files"
 
-    let(:params) { { name:, email:, password:, final_tax_return: } }
+    let(:params) { { name:, email:, password:, finalTaxReturn: } }
 
     subject { post sign_up_api_v1_business_companies_url, params: }
 
@@ -57,7 +57,7 @@ RSpec.describe Api::V1::Business::CompaniesController, type: :request do
       let(:name) { "test" }
       let(:email) { "test@example.com" }
       let(:password) { "password" }
-      let(:final_tax_return) { sample_jpg_file }
+      let(:finalTaxReturn) { sample_jpg_file }
 
       it "returns 200" do
         aggregate_failures do
@@ -80,7 +80,7 @@ RSpec.describe Api::V1::Business::CompaniesController, type: :request do
         let(:name) { "" }
         let(:email) { "test@example.com" }
         let(:password) { "password" }
-        let(:final_tax_return) { sample_jpg_file }
+        let(:finalTaxReturn) { sample_jpg_file }
 
         it "returns 400" do
           aggregate_failures do

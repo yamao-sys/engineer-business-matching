@@ -27,10 +27,10 @@ class Api::V1::Business::CompaniesController < Api::V1::Business::BaseController
   private
 
   def validate_sign_up_params
-    params.permit(:name, :email, :password, :final_tax_return).to_h.symbolize_keys
+    params.permit(:name, :email, :password, :finalTaxReturn).to_h.transform_keys(&:underscore).symbolize_keys
   end
 
   def sign_up_params
-    params.permit(:name, :email, :password, :final_tax_return).to_h.symbolize_keys
+    params.permit(:name, :email, :password, :finalTaxReturn).to_h.transform_keys(&:underscore).symbolize_keys
   end
 end
