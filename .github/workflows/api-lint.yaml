@@ -7,6 +7,9 @@ on:
       - "api-server/**/*.rake"
       - "api-server/**/Gemfile"
       - ".github/workflows/api-lint.yaml"
+  push:
+    branches:
+      - main
 
 jobs:
   api-lint:
