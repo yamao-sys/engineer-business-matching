@@ -3,7 +3,8 @@ name: API Lint
 on:
   pull_request:
     paths:
-      - "api-server/**/*.{rb,rake}"
+      - "api-server/**/*.rb"
+      - "api-server/**/*.rake"
       - "api-server/**/Gemfile"
       - ".github/workflows/api-lint.yml"
 
