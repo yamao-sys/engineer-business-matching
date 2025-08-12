@@ -17,21 +17,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
+      - name: Copy env file
+        working-directory: api-server
+        run: cp .env.test .env
+
       # Rubyのセットアップ
       - name: Set up Ruby
         uses: ruby/setup-ruby@2a7b30092b0caf9c046252510f9273b4875f3db9 # v1.254.0
         with:
           ruby-version: 3.4
           bundler-cache: true
-
-      - name: Copy env file
-        working-directory: api-server
-        run: cp .env.test .env
-
-      # 必要なGemのインストール
-      - name: Install dependencies
-        working-directory: api-server
-        run: bundle install
+          working-directory: api-server
 
       # Rubocopチェックの実行
       - name: Run Rubocop check
