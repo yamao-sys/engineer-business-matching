@@ -9,6 +9,7 @@ services:
       - ./api-server:/app
     ports:
       - 4000:4000
+      - 4100:4100
     depends_on:
       - db
     tty: true # コンテナの永続化
@@ -50,6 +51,7 @@ services:
       - 3001:3001
       - 3002:3002
       - 3100:3100
+      - 3101:3101
       - 3102:3102
     volumes:
       - ./frontend:/app
