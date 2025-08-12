@@ -60,11 +60,11 @@ jobs:
         working-directory: ./api-server
         run: |
           rm -f tmp/pids/server.pid
-          bundle exec rails s -p 4000 -b '0.0.0.0' &
+          bundle exec rails s -e test -p 4100 -b '0.0.0.0' &
 
       - name: migrate
         working-directory: ./api-server
-        run: rails ridgepole:apply
+        run: RAILS_ENV=test rails ridgepole:apply
 
       # - name: Seeding
       #   working-directory: ./api-server
