@@ -70,4 +70,6 @@ Rails.application.configure do
 
   config.hosts << "api_server:4000"
   config.hosts << "127.0.0.1:4000"
+  config.hosts << "api_server:4100"
+  config.hosts << "127.0.0.1:4100"
 end
