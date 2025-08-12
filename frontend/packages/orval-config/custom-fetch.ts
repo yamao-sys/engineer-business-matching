@@ -13,14 +13,14 @@ const getBody = <T>(c: Response | Request): Promise<T> => {
 };
 
 const getUrl = (contextUrl: string): string => {
-  const baseUrl = process.env.VITE_API_ENDPOINT_URI;
+  const baseUrl = process.env.API_ENDPOINT_URI;
 
   if (!baseUrl) {
     throw new Error("baseUrl is not defined");
   }
 
   // NOTE: 相対パスを処理できるようにする
-  const requestUrl = new URL(contextUrl, baseUrl);
+  const requestUrl = new URL(`${process.env.API_ENDPOINT_PREFIX}${contextUrl}`, baseUrl);
   return requestUrl.toString();
 };
 
