@@ -55,4 +55,4 @@ jobs:
 
       - name: Run Tests
         working-directory: api-server
-        run: RAILS_ENV=test rspec
+        run: RAILS_ENV=test bundle exec rspec
