@@ -52,10 +52,6 @@ jobs:
           ruby-version: 3.4
           bundler-cache: true
 
-      - name: Copy env file
-        working-directory: api-server
-        run: cp .env.test .env
-
       # NOTE: 必要なGemのインストール
       - name: Install dependencies
         working-directory: api-server
