@@ -38,6 +38,9 @@ export const baseConfig = defineConfig({
 
   timeout: 5 * 60 * 1000,
 
+  actionTimeout: 5 * 1000, // NOTE: 操作系のタイムアウト値
+  navigationTimeout: 10 * 1000, // NOTE: ナビゲーション操作のタイムアウト値
+
   /* Configure projects for major browsers */
   projects: [
     {
