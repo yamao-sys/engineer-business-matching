@@ -11,14 +11,7 @@ type Props<T extends FieldValues> = {
   validationErrors: string[];
 };
 
-function BaseControlFormInputInner<T extends FieldValues>({
-  id,
-  type = "text",
-  label,
-  control,
-  name,
-  validationErrors,
-}: Props<T>) {
+function BaseControlFormInputInner<T extends FieldValues>({ id, type = "text", label, control, name, validationErrors }: Props<T>) {
   return (
     <Controller
       control={control}
@@ -26,8 +19,7 @@ function BaseControlFormInputInner<T extends FieldValues>({
       render={({ field }) => {
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           const value = e.target.value;
-          const parsedValue =
-            type === "number" ? (value === "" ? undefined : Number(value)) : value;
+          const parsedValue = type === "number" ? (value === "" ? undefined : Number(value)) : value;
           field.onChange(parsedValue);
         };
 

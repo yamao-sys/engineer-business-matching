@@ -10,34 +10,20 @@ type Props<T extends FieldValues> = {
   validationErrors: string[];
 };
 
-function BaseControlFormTextareaInner<T extends FieldValues>({
-  id,
-  label,
-  control,
-  name,
-  validationErrors,
-}: Props<T>) {
+function BaseControlFormTextareaInner<T extends FieldValues>({ id, label, control, name, validationErrors }: Props<T>) {
   return (
     <>
       <Controller
         control={control}
         name={name}
         render={({ field }) => (
-          <BaseFormTextarea
-            id={id}
-            label={label}
-            {...field}
-            value={field.value ?? ""}
-            validationErrorMessages={validationErrors}
-          />
+          <BaseFormTextarea id={id} label={label} {...field} value={field.value ?? ""} validationErrorMessages={validationErrors} />
         )}
       />
     </>
   );
 }
 
-const BaseControlFormTextarea = memo(
-  BaseControlFormTextareaInner,
-) as typeof BaseControlFormTextareaInner;
+const BaseControlFormTextarea = memo(BaseControlFormTextareaInner) as typeof BaseControlFormTextareaInner;
 
 export default BaseControlFormTextarea;

@@ -6,12 +6,7 @@ type Props = {
   label: string;
 } & JSX.IntrinsicElements["button"];
 
-const BaseButton: FC<Props> = memo(function BaseButton({
-  borderColor,
-  bgColor,
-  label,
-  ...props
-}: Props) {
+const BaseButton: FC<Props> = memo(function BaseButton({ borderColor, bgColor, label, ...props }: Props) {
   return (
     <>
       <button className={`py-2 px-8 ${borderColor} ${bgColor} rounded-xl text-white`} {...props}>
