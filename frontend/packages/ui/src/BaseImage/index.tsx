@@ -37,9 +37,7 @@ const BaseImage: FC<Props> = ({ file }: Props) => {
         }}
       >
         {/* 画像があればプレビューし、なければ「+ 画像をアップロード」を表示 */}
-        {/* eslint-disable @next/next/no-img-element */}
         {imageSource ? <img src={imageSource} alt="アップロード画像" style={{ objectFit: "contain", width: "100%", height: "100%" }} /> : "-"}
-        {/* eslint-enable @next/next/no-img-element */}
       </div>
     </>
   );
