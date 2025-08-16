@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # シーディング
-# docker compose exec -d api_server make test-seed-local
+docker compose run --rm api_server sh -c 'RAILS_ENV=test bundle exec rails db:seed'
 
 # テスト用の環境でAPIサーバを起動
 docker compose exec -d api_server rails s -e test -p 4100 -b '0.0.0.0'

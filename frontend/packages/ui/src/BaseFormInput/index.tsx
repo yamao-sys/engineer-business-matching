@@ -1,4 +1,5 @@
 import { JSX, memo } from "react";
+import BaseErrorMessage from "../BaseErrorMessage";
 
 type Props = {
   label: string;
@@ -20,9 +21,7 @@ const BaseFormInput = memo(function BaseFormInput({ label, id, validationErrorMe
       {validationErrorMessages.length > 0 && (
         <div className="w-full pt-5 text-left">
           {validationErrorMessages.map((message, i) => (
-            <p key={i} className="text-red-400">
-              {message}
-            </p>
+            <BaseErrorMessage key={i} message={message} />
           ))}
         </div>
       )}

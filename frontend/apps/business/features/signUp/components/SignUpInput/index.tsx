@@ -8,6 +8,9 @@ import BaseControlFormInput from "@repo/ui/BaseControlFormInput/index";
 import BaseButton from "@repo/ui/BaseButton/index";
 import BaseControlFormImage from "@repo/ui/BaseControlFormImage/index";
 import { useValidateSignUpMutation } from "../../queries/signUpMutation";
+import BaseTitle from "@repo/ui/BaseTitle/index";
+import BaseFlexCentralBox from "@repo/ui/BaseFlexCentralBox/index";
+import BaseBox from "@repo/ui/BaseBox/index";
 
 type Props = {
   togglePhase: (newPhase: PhaseType) => void;
@@ -44,14 +47,14 @@ const SignUpInput: FC<Props> = ({ togglePhase }: Props) => {
 
   return (
     <>
-      <h3 className="mt-16 w-full text-center text-2xl font-bold">企業登録フォーム</h3>
+      <BaseTitle title="企業登録フォーム" />
 
       <form onSubmit={onSubmit}>
-        <div className="mt-8">
+        <BaseBox>
           <BaseControlFormInput id="name" label="企業名" control={control} name="name" validationErrors={validationErrors.name ?? []} />
-        </div>
+        </BaseBox>
 
-        <div className="mt-8">
+        <BaseBox>
           <BaseControlFormInput
             id="email"
             label="メールアドレス"
@@ -60,9 +63,9 @@ const SignUpInput: FC<Props> = ({ togglePhase }: Props) => {
             type="email"
             validationErrors={validationErrors.email ?? []}
           />
-        </div>
+        </BaseBox>
 
-        <div className="mt-8">
+        <BaseBox>
           <BaseControlFormInput
             id="password"
             label="パスワード"
@@ -71,9 +74,9 @@ const SignUpInput: FC<Props> = ({ togglePhase }: Props) => {
             type="password"
             validationErrors={validationErrors.password ?? []}
           />
-        </div>
+        </BaseBox>
 
-        <div className="mt-8">
+        <BaseBox>
           <BaseControlFormImage
             id="finalTaxReturn"
             label="確定申告書(コピー)"
@@ -83,17 +86,19 @@ const SignUpInput: FC<Props> = ({ togglePhase }: Props) => {
             name="finalTaxReturn"
             validationErrors={validationErrors.finalTaxReturn ?? []}
           />
-        </div>
+        </BaseBox>
 
-        <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
-          <BaseButton
-            disabled={mutation.isPending}
-            borderColor="border-green-500"
-            bgColor="bg-green-500"
-            label={mutation.isPending ? "送信中..." : "確認画面へ"}
-            type="submit"
-          />
-        </div>
+        <BaseBox>
+          <BaseFlexCentralBox>
+            <BaseButton
+              disabled={mutation.isPending}
+              borderColor="border-green-500"
+              bgColor="bg-green-500"
+              label={mutation.isPending ? "送信中..." : "確認画面へ"}
+              type="submit"
+            />
+          </BaseFlexCentralBox>
+        </BaseBox>
       </form>
     </>
   );
