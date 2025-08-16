@@ -6,9 +6,8 @@
  * OpenAPI spec version: 1.0
  */
 
-export * from "./companySignInBadRequestResponse";
 export * from "./companySignInInput";
-export * from "./companySignInOkResponse";
+export * from "./companySignInResponse";
 export * from "./companySignUpInput";
 export * from "./companySignUpResponse";
 export * from "./companySignUpValidationError";

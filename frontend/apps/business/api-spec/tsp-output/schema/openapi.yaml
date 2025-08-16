@@ -23,13 +23,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CompanySignInOkResponse'
+                $ref: '#/components/schemas/CompanySignInResponse'
         '400':
           description: The server could not understand the request due to invalid syntax.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CompanySignInBadRequestResponse'
+                $ref: '#/components/schemas/CompanySignInResponse'
         '500':
           description: Server error
       tags:
@@ -114,16 +114,6 @@ paths:
         - csrf
 components:
   schemas:
-    CompanySignInBadRequestResponse:
-      type: object
-      required:
-        - errors
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-      title: Company SignIn BadRequestError Response
     CompanySignInInput:
       type: object
       required:
@@ -135,14 +125,17 @@ components:
         password:
           type: string
       title: Company SignIn Input
-    CompanySignInOkResponse:
+    CompanySignInResponse:
       type: object
       required:
         - token
+        - error
       properties:
         token:
           type: string
-      title: Company SignIn Ok Response
+        error:
+          type: string
+      title: Company SignIn Response
     CompanySignUpInput:
       type: object
       properties:

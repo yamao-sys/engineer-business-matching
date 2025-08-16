@@ -44,8 +44,8 @@ namespace BusinessService.Company {
     @post
     post(
       @body body: CompanySignInInput,
-    ): SuccessResponseWithHeader<CompanySignInOkResponse>
-      | BadRequestErrorResponse<CompanySignInBadRequestResponse>
+    ): SuccessResponseWithHeader<CompanySignInResponse>
+      | BadRequestErrorResponse<CompanySignInResponse>
       | InternalServerErrorResponse;
   }
 }

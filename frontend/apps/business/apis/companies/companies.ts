@@ -8,13 +8,7 @@
 import { useMutation } from "@tanstack/react-query";
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
 
-import type {
-  CompanySignInBadRequestResponse,
-  CompanySignInInput,
-  CompanySignInOkResponse,
-  CompanySignUpInput,
-  CompanySignUpResponse,
-} from ".././model";
+import type { CompanySignInInput, CompanySignInResponse, CompanySignUpInput, CompanySignUpResponse } from ".././model";
 
 import { customFetch } from "../../../../packages/orval-config/custom-fetch";
 import { customFormData } from "../../../../packages/orval-config/custom-form-data";
@@ -25,12 +19,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary Company Sign In
  */
 export type postCompanySignInResponse200 = {
-  data: CompanySignInOkResponse;
+  data: CompanySignInResponse;
   status: 200;
 };
 
 export type postCompanySignInResponse400 = {
-  data: CompanySignInBadRequestResponse;
+  data: CompanySignInResponse;
   status: 400;
 };
 
@@ -58,7 +52,7 @@ export const postCompanySignIn = async (companySignInInput: CompanySignInInput, 
   });
 };
 
-export const getPostCompanySignInMutationOptions = <TError = CompanySignInBadRequestResponse | null, TContext = unknown>(options?: {
+export const getPostCompanySignInMutationOptions = <TError = CompanySignInResponse | null, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof postCompanySignIn>>, TError, { data: CompanySignInInput }, TContext>;
   request?: SecondParameter<typeof customFetch>;
 }): UseMutationOptions<Awaited<ReturnType<typeof postCompanySignIn>>, TError, { data: CompanySignInInput }, TContext> => {
@@ -80,12 +74,12 @@ export const getPostCompanySignInMutationOptions = <TError = CompanySignInBadReq
 
 export type PostCompanySignInMutationResult = NonNullable<Awaited<ReturnType<typeof postCompanySignIn>>>;
 export type PostCompanySignInMutationBody = CompanySignInInput;
-export type PostCompanySignInMutationError = CompanySignInBadRequestResponse | null;
+export type PostCompanySignInMutationError = CompanySignInResponse | null;
 
 /**
  * @summary Company Sign In
  */
-export const usePostCompanySignIn = <TError = CompanySignInBadRequestResponse | null, TContext = unknown>(options?: {
+export const usePostCompanySignIn = <TError = CompanySignInResponse | null, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof postCompanySignIn>>, TError, { data: CompanySignInInput }, TContext>;
   request?: SecondParameter<typeof customFetch>;
 }): UseMutationResult<Awaited<ReturnType<typeof postCompanySignIn>>, TError, { data: CompanySignInInput }, TContext> => {
