@@ -1,13 +1,13 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { PhaseType } from "@/features/signUp/types";
 import { CompanySignUpInput, CompanySignUpValidationError } from "@/apis/model";
 import { useFormContext } from "react-hook-form";
 import BaseControlFormInput from "@repo/ui/BaseControlFormInput/index";
 import BaseButton from "@repo/ui/BaseButton/index";
-import { validateSignUp } from "../../actions/signUp";
 import BaseControlFormImage from "@repo/ui/BaseControlFormImage/index";
+import { useValidateSignUpMutation } from "../../queries/signUpMutation";
 
 type Props = {
   togglePhase: (newPhase: PhaseType) => void;
@@ -25,23 +25,22 @@ const SignUpInput: FC<Props> = ({ togglePhase }: Props) => {
 
   const { control, handleSubmit, setValue, watch } = useFormContext<CompanySignUpInput>();
 
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      // TODO: loadingをTanstack Queryで管理する
-      // setLoading(true);
-      const resValidationErrors = await validateSignUp(data);
-      if (Object.keys(resValidationErrors).length > 0) {
-        setValidationErrors(resValidationErrors);
+  const onMutate = useCallback(() => setValidationErrors(INITIAL_VALIDATION_ERRORS), [setValidationErrors]);
+  const onMutateSuccess = useCallback(
+    (result: CompanySignUpValidationError) => {
+      if (Object.keys(result).length > 0) {
+        setValidationErrors(result);
         return;
       }
 
       // NOTE: 確認画面に遷移
       togglePhase("confirm");
-    } catch (error) {
-      console.error("Failed to save draft:", error);
-      alert("送信に失敗しました");
-    }
-  });
+    },
+    [setValidationErrors, togglePhase],
+  );
+  const mutation = useValidateSignUpMutation(onMutate, onMutateSuccess);
+
+  const onSubmit = handleSubmit(async (data) => mutation.mutate(data));
 
   return (
     <>
@@ -87,7 +86,13 @@ const SignUpInput: FC<Props> = ({ togglePhase }: Props) => {
         </div>
 
         <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
-          <BaseButton borderColor="border-green-500" bgColor="bg-green-500" label="確認画面へ" type="submit" />
+          <BaseButton
+            disabled={mutation.isPending}
+            borderColor="border-green-500"
+            bgColor="bg-green-500"
+            label={mutation.isPending ? "送信中..." : "確認画面へ"}
+            type="submit"
+          />
         </div>
       </form>
     </>
