@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           collection do
             post "validate-sign-up", to: "companies#validate_sign_up"
             post "sign-up", to: "companies#sign_up"
+            post "sign-in", to: "companies#sign_in"
           end
         end
       end
