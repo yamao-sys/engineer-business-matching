@@ -58,9 +58,9 @@ jobs:
         working-directory: ./api-server
         run: RAILS_ENV=test bundle exec rails ridgepole:apply
 
-      # - name: Seeding
-      #   working-directory: ./api-server
-      #   run: make test-seed-ci
+      - name: Seeding
+        working-directory: ./api-server
+        run: RAILS_ENV=test bundle exec rails db:seed
 
       - uses: awalsh128/cache-apt-pkgs-action@4c82c3ccdc1344ee11e9775dbdbdf43aa8a5614e # v1.5.1
         with:
