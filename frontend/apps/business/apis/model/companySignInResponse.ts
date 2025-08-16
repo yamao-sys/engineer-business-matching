@@ -6,6 +6,7 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface CompanySignInBadRequestResponse {
-  errors: string[];
+export interface CompanySignInResponse {
+  token: string;
+  error: string;
 }

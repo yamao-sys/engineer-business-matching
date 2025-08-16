@@ -147,6 +147,8 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.2)
     json (2.13.2)
+    jwt (3.1.2)
+      base64
     kamal (2.7.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
@@ -391,6 +393,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  jwt
   kamal
   mysql2 (~> 0.5)
   puma (>= 5.0)
