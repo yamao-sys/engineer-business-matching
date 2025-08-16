@@ -3,7 +3,10 @@ name: Frontend Lint
 on:
   pull_request:
     paths:
-      - "frontend/**/*.{js,ts,tsx,md}"
+      - "frontend/**/*js"
+      - "frontend/**/*mjs"
+      - "frontend/**/*ts"
+      - "frontend/**/*tsx"
       - "frontend/**/package.json"
 
 jobs:
