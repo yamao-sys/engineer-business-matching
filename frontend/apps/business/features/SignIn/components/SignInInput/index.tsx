@@ -25,7 +25,7 @@ const SignInInput: FC = () => {
         return;
       }
 
-      window.alert("ログインしました");
+      window.alert("ログインしました。");
       router.push("/");
     },
     [setValidationError, router],
