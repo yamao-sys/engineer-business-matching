@@ -3,10 +3,10 @@
 import { FC, useCallback } from "react";
 import { PhaseType } from "@/features/signUp/types";
 import { useFormContext } from "react-hook-form";
-import { CompanySignUpInput } from "@/apis/model";
+import { CompanySignUpInput, CompanySignUpValidationError } from "@/apis/model";
 import BaseButton from "@repo/ui/BaseButton/index";
 import BaseImage from "@repo/ui/BaseImage/index";
-import { signUp } from "../../actions/signUp";
+import { useSignUpMutation } from "../../queries/signUpMutation";
 
 type Props = {
   togglePhase: (newPhase: PhaseType) => void;
@@ -18,15 +18,18 @@ const SignUpConfirm: FC<Props> = ({ togglePhase }: Props) => {
 
   const handleBackToInput = () => togglePhase("input");
 
-  const handleSignUp = useCallback(async () => {
-    const resValidationErrors = await signUp(values);
-    if (Object.keys(resValidationErrors).length === 0) {
-      togglePhase("thanks");
-      return;
-    }
+  const onMutateSuccess = useCallback(
+    (result: CompanySignUpValidationError) => {
+      if (Object.keys(result).length === 0) {
+        togglePhase("thanks");
+        return;
+      }
+    },
+    [togglePhase],
+  );
+  const mutation = useSignUpMutation(onMutateSuccess);
 
-    throw Error("Failed to sign up");
-  }, [values, togglePhase]);
+  const handleSignUp = useCallback(async () => mutation.mutate(values), [mutation, values]);
 
   return (
     <>
@@ -52,8 +55,20 @@ const SignUpConfirm: FC<Props> = ({ togglePhase }: Props) => {
       </div>
 
       <div className="flex w-full justify-around mt-16">
-        <BaseButton borderColor="border-gray-500" bgColor="bg-gray-500" label="入力へ戻る" onClick={handleBackToInput} />
-        <BaseButton borderColor="border-green-500" bgColor="bg-green-500" label="登録する" onClick={handleSignUp} />
+        <BaseButton
+          disabled={mutation.isPending}
+          borderColor="border-gray-500"
+          bgColor="bg-gray-500"
+          label={mutation.isPending ? "送信中..." : "入力へ戻る"}
+          onClick={handleBackToInput}
+        />
+        <BaseButton
+          disabled={mutation.isPending}
+          borderColor="border-green-500"
+          bgColor="bg-green-500"
+          label={mutation.isPending ? "送信中..." : "登録する"}
+          onClick={handleSignUp}
+        />
       </div>
     </>
   );
