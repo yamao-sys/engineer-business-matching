@@ -3,6 +3,7 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import { Control, Controller, FieldValues, Path, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
+import BaseFlexCentralBox from "../BaseFlexCentralBox";
 
 type Props<T extends FieldValues> = {
   id: string;
@@ -102,7 +103,7 @@ function BaseControlFormImageInner<T extends FieldValues>({ id, label, control, 
 
               {/* ファイルクリアボタン */}
               {field.value && (
-                <div className="flex justify-center">
+                <BaseFlexCentralBox>
                   <button
                     type="button"
                     className="mt-2 justify-center inline-flex items-center px-3 py-1 text-sm font-medium text-red-600 bg-red-50 border border-red-200 rounded-md hover:bg-red-100 transition-colors"
@@ -113,7 +114,7 @@ function BaseControlFormImageInner<T extends FieldValues>({ id, label, control, 
                     </svg>
                     削除
                   </button>
-                </div>
+                </BaseFlexCentralBox>
               )}
 
               {/* バリデーションエラー */}
