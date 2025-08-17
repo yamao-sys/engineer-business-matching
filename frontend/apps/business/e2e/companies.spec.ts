@@ -123,7 +123,7 @@ test.describe("/sign_up", () => {
 
     // NOTE: 確定申告書(コピー)のアップロード
     const fileChooserPromise = page.waitForEvent("filechooser");
-    await page.getByText("ファイルをドラッグ&ドロップ、またはクリックして選択").click();
+    await page.getByText("確定申告書(コピー) ファイルをドラッグ&ドロップ、またはクリックして選択").click();
     const finalTaxReturnFileChooser = await fileChooserPromise;
     await finalTaxReturnFileChooser.setFiles(path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures/test.jpg"));
 
@@ -151,7 +151,7 @@ test.describe("/sign_up", () => {
 
     // NOTE: 確定申告書(コピー)のアップロード
     const fileChooserPromise = page.waitForEvent("filechooser");
-    await page.getByText("ファイルをドラッグ&ドロップ、またはクリックして選択").click();
+    await page.getByText("確定申告書(コピー) ファイルをドラッグ&ドロップ、またはクリックして選択").click();
     const finalTaxReturnFileChooser = await fileChooserPromise;
     await finalTaxReturnFileChooser.setFiles(path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures/test.jpg"));
 
@@ -192,7 +192,7 @@ test.describe("/sign_up", () => {
 
     // NOTE: 確定申告書(コピー)のアップロード
     const fileChooserPromise = page.waitForEvent("filechooser");
-    await page.getByText("ファイルをドラッグ&ドロップ、またはクリックして選択").click();
+    await page.getByText("確定申告書(コピー) ファイルをドラッグ&ドロップ、またはクリックして選択").click();
     const finalTaxReturnFileChooser = await fileChooserPromise;
     await finalTaxReturnFileChooser.setFiles(path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures/test.jpg"));
 
@@ -226,7 +226,7 @@ test.describe("/sign_up", () => {
 
     // NOTE: 確定申告書(コピー)のアップロード
     const fileChooserPromise = page.waitForEvent("filechooser");
-    await page.getByText("ファイルをドラッグ&ドロップ、またはクリックして選択").click();
+    await page.getByText("確定申告書(コピー) ファイルをドラッグ&ドロップ、またはクリックして選択").click();
     const finalTaxReturnFileChooser = await fileChooserPromise;
     await finalTaxReturnFileChooser.setFiles(path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures/test.jpg"));
 

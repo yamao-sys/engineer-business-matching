@@ -94,7 +94,7 @@ function BaseControlFormImageInner<T extends FieldValues>({ id, label, control, 
                     </div>
                     <div>
                       <p className="text-sm text-gray-600">
-                        {isDragActive ? "ファイルをドロップしてください" : "ファイルをドラッグ&ドロップ、またはクリックして選択"}
+                        {isDragActive ? "ファイルをドロップしてください" : `${label} ファイルをドラッグ&ドロップ、またはクリックして選択`}
                       </p>
                     </div>
                   </div>
