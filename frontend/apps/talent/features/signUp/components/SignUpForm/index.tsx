@@ -1,0 +1,53 @@
+"use client";
+
+import { FC, useState } from "react";
+import SignUpLayout from "../SignUpLayout";
+import SignUpInput from "../SignUpInput";
+import SignUpConfirm from "../SignUpConfirm";
+import SignUpThanks from "../SignUpThanks";
+import { PhaseType } from "@/features/signUp/types";
+import { FormProvider, useForm } from "react-hook-form";
+import { EngineerSignUpInput } from "@/apis/model";
+import { createQueryClient } from "../../../../../../libs/queryFactory";
+import { QueryClientProvider } from "@tanstack/react-query";
+
+const SignUpForm: FC = () => {
+  const [phase, setPhase] = useState<PhaseType>("input");
+
+  const togglePhase = (newPhase: PhaseType) => setPhase(newPhase);
+
+  const formMethods = useForm<EngineerSignUpInput>({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      birthday: undefined,
+      frontIdentification: undefined,
+      backIdentification: undefined,
+    },
+  });
+
+  const queryClient = createQueryClient();
+
+  const phaseComponent = () => {
+    switch (phase) {
+      case "input":
+        return <SignUpInput togglePhase={togglePhase} />;
+      case "confirm":
+        return <SignUpConfirm togglePhase={togglePhase} />;
+      case "thanks":
+        return <SignUpThanks />;
+    }
+  };
+
+  return (
+    <SignUpLayout phase={phase}>
+      <QueryClientProvider client={queryClient}>
+        <FormProvider {...formMethods}>{phaseComponent()}</FormProvider>
+      </QueryClientProvider>
+    </SignUpLayout>
+  );
+};
+
+export default SignUpForm;
