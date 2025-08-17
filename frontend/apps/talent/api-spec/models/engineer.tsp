@@ -6,8 +6,8 @@ import "./common.tsp";
 
 using Http;
 
-@summary("Supporter SignUp Validation Error")
-model SupporterSignUpValidationError {
+@summary("Engineer SignUp Validation Error")
+model EngineerSignUpValidationError {
   firstName?: string[];
   lastName?: string[];
   email?: string[];
@@ -17,8 +17,8 @@ model SupporterSignUpValidationError {
   backIdentification?: string[];
 }
 
-@summary("Supporter SignUp Input")
-model SupporterSignUpInput {
+@summary("Engineer SignUp Input")
+model EngineerSignUpInput {
   firstName: HttpPart<string>;
   lastName: HttpPart<string>;
   email: HttpPart<string>;
@@ -28,20 +28,20 @@ model SupporterSignUpInput {
   backIdentification?: HttpPart<Binary>;
 }
 
-@summary("Supporter SignUp Response")
-model SupporterSignUpResponse {
+@summary("Engineer SignUp Response")
+model EngineerSignUpResponse {
   code: integer;
-  errors: SupporterSignUpValidationError;
+  errors: EngineerSignUpValidationError;
 }
 
-@summary("Supporter SignIn Input")
-model SupporterSignInInput {
+@summary("Engineer SignIn Input")
+model EngineerSignInInput {
   email: string;
   password: string;
 }
 
-@summary("Supporter SignIn Response")
-model SupporterSignInResponse {
+@summary("Engineer SignIn Response")
+model EngineerSignInResponse {
   token: string;
   error: string;
 }
