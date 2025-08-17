@@ -74,6 +74,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     Rails.application.load_tasks
     Rake::Task["db:migrate"].execute
+    Rake::Task["data:migrate"].execute
   end
 
   # config.before do
