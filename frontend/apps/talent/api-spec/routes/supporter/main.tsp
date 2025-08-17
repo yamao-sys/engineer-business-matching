@@ -44,8 +44,8 @@ namespace TalentService.Supporter {
     @post
     post(
       @body body: SupporterSignInInput,
-    ): SuccessResponseWithHeader<SupporterSignInOkResponse>
-      | BadRequestErrorResponse<SupporterSignInBadRequestResponse>
+    ): SuccessResponseWithHeader<SupporterSignInResponse>
+      | BadRequestErrorResponse<SupporterSignInResponse>
       | InternalServerErrorResponse;
   }
 }

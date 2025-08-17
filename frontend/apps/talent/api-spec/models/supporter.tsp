@@ -40,17 +40,8 @@ model SupporterSignInInput {
   password: string;
 }
 
-@summary("Supporter SignIn Ok Response")
-model SupporterSignInOkResponse {
+@summary("Supporter SignIn Response")
+model SupporterSignInResponse {
   token: string;
-}
-
-@summary("Supporter SignIn Error Response")
-model SupporterSignInOkResponseHeader {
-  "Set-Cookie": string;
-}
-
-@summary("Supporter SignIn BadRequestError Response")
-model SupporterSignInBadRequestResponse {
-  errors: string[];
+  error: string;
 }
