@@ -6,6 +6,7 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface SupporterSignInBadRequestResponse {
-  errors: string[];
+export interface SupporterSignInResponse {
+  token: string;
+  error: string;
 }
