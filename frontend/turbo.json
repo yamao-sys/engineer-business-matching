@@ -5,8 +5,8 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["NODE_ENV"]
+      "env": ["NODE_ENV", "PORT", "API_ENDPOINT_URI", "API_ENDPOINT_PREFIX", "TZ"],
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -15,9 +15,10 @@
       "dependsOn": ["^check-types"]
     },
     "dev": {
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.test.local", ".env.test"],
+      "env": ["NODE_ENV", "PORT", "API_ENDPOINT_URI", "API_ENDPOINT_PREFIX", "TZ"],
       "cache": false,
-      "persistent": true,
-      "env": ["NODE_ENV"]
+      "persistent": true
     },
     "test:e2e": {
       "dependsOn": ["^build"],
