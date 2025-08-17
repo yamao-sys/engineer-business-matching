@@ -4,12 +4,12 @@ info:
   version: '1.0'
   description: talent APIs
 tags:
-  - name: supporters
+  - name: engineers
 paths:
-  /supporters/sign-in:
+  /engineers/sign-in:
     post:
-      operationId: post-supporter-sign-in
-      summary: Supporter Sign In
+      operationId: post-engineer-sign-in
+      summary: Engineer Sign In
       parameters: []
       responses:
         '200':
@@ -22,27 +22,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignInResponse'
+                $ref: '#/components/schemas/EngineerSignInResponse'
         '400':
           description: The server could not understand the request due to invalid syntax.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignInResponse'
+                $ref: '#/components/schemas/EngineerSignInResponse'
         '500':
           description: Server error
       tags:
-        - supporters
+        - engineers
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SupporterSignInInput'
-  /supporters/sign-up:
+              $ref: '#/components/schemas/EngineerSignInInput'
+  /engineers/sign-up:
     post:
-      operationId: post-supporter-sign-up
-      summary: Supporter Sign Up
+      operationId: post-engineer-sign-up
+      summary: Engineer Sign Up
       parameters: []
       responses:
         '200':
@@ -50,27 +50,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignUpResponse'
+                $ref: '#/components/schemas/EngineerSignUpResponse'
         '400':
           description: The server could not understand the request due to invalid syntax.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignUpResponse'
+                $ref: '#/components/schemas/EngineerSignUpResponse'
         '500':
           description: Server error
       tags:
-        - supporters
+        - engineers
       requestBody:
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/SupporterSignUpInput'
-  /supporters/validate-sign-up:
+              $ref: '#/components/schemas/EngineerSignUpInput'
+  /engineers/validate-sign-up:
     post:
-      operationId: post-supporter-validate-sign-up
-      summary: Supporter Validate Sign Up
+      operationId: post-engineer-validate-sign-up
+      summary: Engineer Validate Sign Up
       parameters: []
       responses:
         '200':
@@ -78,26 +78,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignUpResponse'
+                $ref: '#/components/schemas/EngineerSignUpResponse'
         '400':
           description: The server could not understand the request due to invalid syntax.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignUpResponse'
+                $ref: '#/components/schemas/EngineerSignUpResponse'
         '500':
           description: Server error
       tags:
-        - supporters
+        - engineers
       requestBody:
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/SupporterSignUpInput'
+              $ref: '#/components/schemas/EngineerSignUpInput'
 components:
   schemas:
-    SupporterSignInInput:
+    EngineerSignInInput:
       type: object
       required:
         - email
@@ -107,8 +107,8 @@ components:
           type: string
         password:
           type: string
-      title: Supporter SignIn Input
-    SupporterSignInResponse:
+      title: Engineer SignIn Input
+    EngineerSignInResponse:
       type: object
       required:
         - token
@@ -118,8 +118,8 @@ components:
           type: string
         error:
           type: string
-      title: Supporter SignIn Response
-    SupporterSignUpInput:
+      title: Engineer SignIn Response
+    EngineerSignUpInput:
       type: object
       properties:
         firstName:
@@ -144,7 +144,7 @@ components:
         - lastName
         - email
         - password
-    SupporterSignUpResponse:
+    EngineerSignUpResponse:
       type: object
       required:
         - code
@@ -153,9 +153,9 @@ components:
         code:
           type: integer
         errors:
-          $ref: '#/components/schemas/SupporterSignUpValidationError'
-      title: Supporter SignUp Response
-    SupporterSignUpValidationError:
+          $ref: '#/components/schemas/EngineerSignUpValidationError'
+      title: Engineer SignUp Response
+    EngineerSignUpValidationError:
       type: object
       properties:
         firstName:
@@ -186,7 +186,7 @@ components:
           type: array
           items:
             type: string
-      title: Supporter SignUp Validation Error
+      title: Engineer SignUp Validation Error
 servers:
   - url: https://localhost:4000
     variables: {}
