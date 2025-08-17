@@ -61,3 +61,5 @@ gem "rails-i18n"
 
 gem "bcrypt"
 gem "jwt"
+
+gem "data_migrate"
