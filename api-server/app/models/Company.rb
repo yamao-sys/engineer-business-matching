@@ -1,7 +1,10 @@
 class Company < ApplicationRecord
   include FileUploadable
 
+  belongs_to :industry, optional: true
+
   has_attached_file :final_tax_return
+  has_attached_file :logo
 
   has_secure_password
 
