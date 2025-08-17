@@ -152,4 +152,41 @@ RSpec.describe Api::V1::Business::CompaniesController, type: :request do
       end
     end
   end
+
+  describe "GET #show" do
+    include_context "with files"
+    include_context "with business auth"
+
+    let(:industry) { Industry.find_by(name: "コミュニーケーション系") }
+    let!(:company) { create(:company, email: "test@example.com", password: "password", industry:, logo: sample_jpg_file) }
+
+    let(:company_id) { company.id }
+
+    subject { get api_v1_business_company_url(company_id), headers: business_auth_header }
+
+    it "returns 200" do
+      aggregate_failures do
+        expect(subject).to eq(200)
+
+        res_body = JSON.parse(response.body).deep_symbolize_keys
+        expect(res_body[:id]).to eq(company.id)
+        expect(res_body[:name]).to eq(company.name)
+        expect(res_body[:email]).to eq(company.email)
+        expect(res_body[:logo]).to be_present
+        expect(res_body[:address]).to eq(company.address)
+        expect(res_body[:site_url]).to eq(company.site_url)
+        expect(res_body[:employee_count]).to eq(company.employee_count)
+        expect(res_body[:industry][:id]).to eq(industry.id)
+        expect(res_body[:industry][:name]).to eq(industry.name)
+      end
+    end
+
+    context "when the company is not found" do
+      let(:company_id) { 0 }
+
+      it "returns 404" do
+        expect(subject).to eq(404)
+      end
+    end
+  end
 end

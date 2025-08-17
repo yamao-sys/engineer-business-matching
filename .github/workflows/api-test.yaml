@@ -55,4 +55,6 @@ jobs:
 
       - name: Run Tests
         working-directory: api-server
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: RAILS_ENV=test bundle exec rspec

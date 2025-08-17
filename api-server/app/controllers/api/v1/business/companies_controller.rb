@@ -1,4 +1,7 @@
 class Api::V1::Business::CompaniesController < Api::V1::Business::BaseController
+  before_action :business_authenticate, only: [ :show ]
+  before_action :authenticated_company, only: [ :show ]
+
   def validate_sign_up
     permitted_params = validate_sign_up_params
     company = Company.new(name: permitted_params[:name], email: permitted_params[:email], password: permitted_params[:password])
@@ -36,6 +39,10 @@ class Api::V1::Business::CompaniesController < Api::V1::Business::BaseController
     end
   end
 
+  def show
+    render json: Serializer.call(CompanySerializer, authenticated_company)
+  end
+
   private
 
   def validate_sign_up_params
@@ -48,5 +55,9 @@ class Api::V1::Business::CompaniesController < Api::V1::Business::BaseController
 
   def sign_in_params
     params.permit(:email, :password).to_h.transform_keys(&:underscore).symbolize_keys
+  end
+
+  def authenticated_company
+    @authenticated_company ||= Company.find(params[:id])
   end
 end

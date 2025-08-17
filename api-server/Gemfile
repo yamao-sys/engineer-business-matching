@@ -63,3 +63,6 @@ gem "bcrypt"
 gem "jwt"
 
 gem "data_migrate"
+
+gem "active_model_serializers"
+gem "jsonapi-serializer"
