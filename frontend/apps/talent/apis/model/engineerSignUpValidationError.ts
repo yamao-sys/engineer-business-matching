@@ -6,7 +6,7 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface SupporterSignUpValidationError {
+export interface EngineerSignUpValidationError {
   firstName?: string[];
   lastName?: string[];
   email?: string[];

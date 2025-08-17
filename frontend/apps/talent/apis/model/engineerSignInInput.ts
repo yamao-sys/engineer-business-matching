@@ -6,12 +6,7 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface SupporterSignUpInput {
-  firstName: string;
-  lastName: string;
+export interface EngineerSignInInput {
   email: string;
   password: string;
-  birthday?: Date;
-  frontIdentification?: Blob;
-  backIdentification?: Blob;
 }
