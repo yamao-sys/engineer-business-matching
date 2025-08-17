@@ -13,4 +13,4 @@ RUN bundle install
 
 COPY . /app
 
-CMD sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 4000 -b '0.0.0.0'"
+CMD sh -c "bundle install && rm -f tmp/pids/server.pid && bundle exec rails s -p 4000 -b '0.0.0.0'"
