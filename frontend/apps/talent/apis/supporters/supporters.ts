@@ -8,13 +8,7 @@
 import { useMutation } from "@tanstack/react-query";
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
 
-import type {
-  SupporterSignInBadRequestResponse,
-  SupporterSignInInput,
-  SupporterSignInOkResponse,
-  SupporterSignUpInput,
-  SupporterSignUpResponse,
-} from ".././model";
+import type { SupporterSignInInput, SupporterSignInResponse, SupporterSignUpInput, SupporterSignUpResponse } from ".././model";
 
 import { customFetch } from "../../../../packages/orval-config/custom-fetch";
 import { customFormData } from "../../../../packages/orval-config/custom-form-data";
@@ -25,12 +19,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary Supporter Sign In
  */
 export type postSupporterSignInResponse200 = {
-  data: SupporterSignInOkResponse;
+  data: SupporterSignInResponse;
   status: 200;
 };
 
 export type postSupporterSignInResponse400 = {
-  data: SupporterSignInBadRequestResponse;
+  data: SupporterSignInResponse;
   status: 400;
 };
 
@@ -61,7 +55,7 @@ export const postSupporterSignIn = async (
   });
 };
 
-export const getPostSupporterSignInMutationOptions = <TError = SupporterSignInBadRequestResponse | null, TContext = unknown>(options?: {
+export const getPostSupporterSignInMutationOptions = <TError = SupporterSignInResponse | null, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof postSupporterSignIn>>, TError, { data: SupporterSignInInput }, TContext>;
   request?: SecondParameter<typeof customFetch>;
 }): UseMutationOptions<Awaited<ReturnType<typeof postSupporterSignIn>>, TError, { data: SupporterSignInInput }, TContext> => {
@@ -83,12 +77,12 @@ export const getPostSupporterSignInMutationOptions = <TError = SupporterSignInBa
 
 export type PostSupporterSignInMutationResult = NonNullable<Awaited<ReturnType<typeof postSupporterSignIn>>>;
 export type PostSupporterSignInMutationBody = SupporterSignInInput;
-export type PostSupporterSignInMutationError = SupporterSignInBadRequestResponse | null;
+export type PostSupporterSignInMutationError = SupporterSignInResponse | null;
 
 /**
  * @summary Supporter Sign In
  */
-export const usePostSupporterSignIn = <TError = SupporterSignInBadRequestResponse | null, TContext = unknown>(options?: {
+export const usePostSupporterSignIn = <TError = SupporterSignInResponse | null, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof postSupporterSignIn>>, TError, { data: SupporterSignInInput }, TContext>;
   request?: SecondParameter<typeof customFetch>;
 }): UseMutationResult<Awaited<ReturnType<typeof postSupporterSignIn>>, TError, { data: SupporterSignInInput }, TContext> => {

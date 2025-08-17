@@ -22,13 +22,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignInOkResponse'
+                $ref: '#/components/schemas/SupporterSignInResponse'
         '400':
           description: The server could not understand the request due to invalid syntax.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SupporterSignInBadRequestResponse'
+                $ref: '#/components/schemas/SupporterSignInResponse'
         '500':
           description: Server error
       tags:
@@ -97,16 +97,6 @@ paths:
               $ref: '#/components/schemas/SupporterSignUpInput'
 components:
   schemas:
-    SupporterSignInBadRequestResponse:
-      type: object
-      required:
-        - errors
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-      title: Supporter SignIn BadRequestError Response
     SupporterSignInInput:
       type: object
       required:
@@ -118,14 +108,17 @@ components:
         password:
           type: string
       title: Supporter SignIn Input
-    SupporterSignInOkResponse:
+    SupporterSignInResponse:
       type: object
       required:
         - token
+        - error
       properties:
         token:
           type: string
-      title: Supporter SignIn Ok Response
+        error:
+          type: string
+      title: Supporter SignIn Response
     SupporterSignUpInput:
       type: object
       properties:

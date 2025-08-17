@@ -6,9 +6,8 @@
  * OpenAPI spec version: 1.0
  */
 
-export * from "./supporterSignInBadRequestResponse";
 export * from "./supporterSignInInput";
-export * from "./supporterSignInOkResponse";
+export * from "./supporterSignInResponse";
 export * from "./supporterSignUpInput";
 export * from "./supporterSignUpResponse";
 export * from "./supporterSignUpValidationError";
