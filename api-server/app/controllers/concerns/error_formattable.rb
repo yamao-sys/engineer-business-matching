@@ -7,9 +7,10 @@ module ErrorFormattable
     errors = {}
 
     validation_errors.each do |validation_error|
-      errors[validation_error.attribute] = [] unless errors.key?(validation_error.attribute)
+      attr_name = validation_error.attribute.to_s.camelize(:lower).to_sym
+      errors[attr_name] = [] unless errors.key?(attr_name)
 
-      errors[validation_error.attribute] << validation_error.full_message
+      errors[attr_name] << validation_error.full_message
     end
 
     errors

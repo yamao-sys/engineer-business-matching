@@ -44,7 +44,7 @@ RSpec.describe Api::V1::Talent::EngineersController, type: :request do
             expect(subject).to eq(400)
 
             res_body = JSON.parse(response.body).deep_symbolize_keys
-            expected_errors = { first_name: [ "名を入力してください。" ] }
+            expected_errors = { firstName: [ "名を入力してください。" ] }
             expect(res_body[:errors]).to eq(expected_errors)
           end
         end
@@ -102,7 +102,7 @@ RSpec.describe Api::V1::Talent::EngineersController, type: :request do
             expect(subject).to eq(400)
 
             res_body = JSON.parse(response.body).deep_symbolize_keys
-            expected_errors = { first_name: [ "名を入力してください。" ] }
+            expected_errors = { firstName: [ "名を入力してください。" ] }
             expect(res_body[:errors]).to eq(expected_errors)
 
             created_engineer = Engineer.find_by(email:)
