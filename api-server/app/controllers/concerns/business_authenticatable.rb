@@ -8,7 +8,6 @@ module BusinessAuthenticatable
     else
       token = authorization_header.split(" ")[1]
       secret_key = Rails.application.credentials.secret_key_base
-      p secret_key
       decoded_token = JWT.decode(token, secret_key, true, { algorithm: "HS256" })
 
       @company = Company.find(decoded_token[0]["company_id"])
