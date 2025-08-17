@@ -38,6 +38,18 @@ class Api::V1::Talent::EngineersController < Api::V1::Talent::BaseController
     end
   end
 
+  def sign_in
+    permitted_params = sign_in_params
+    engineer = Engineer.find_by(email: permitted_params[:email])
+
+    if engineer.blank? || !engineer.authenticate(permitted_params[:password])
+      render json: { token: "", error: "メールアドレスまたはパスワードに該当するユーザが見つかりません。" }, status: :bad_request
+    else
+      token = talent_create_token(engineer.id)
+      render json: { token:, error: "" }
+    end
+  end
+
   private
 
   def validate_sign_up_params
@@ -46,5 +58,9 @@ class Api::V1::Talent::EngineersController < Api::V1::Talent::BaseController
 
   def sign_up_params
     params.permit(:firstName, :lastName, :email, :password, :birthday, :frontIdentification, :backIdentification).to_h.transform_keys(&:underscore).symbolize_keys
+  end
+
+  def sign_in_params
+    params.permit(:email, :password).to_h.transform_keys(&:underscore).symbolize_keys
   end
 end
