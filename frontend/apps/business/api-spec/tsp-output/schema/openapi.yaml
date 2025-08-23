@@ -96,6 +96,67 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CompanySignUpInput'
+  /companies/{id}:
+    get:
+      operationId: get-company
+      summary: Show Company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - companies
+      security:
+        - ApiKeyAuth: []
+    put:
+      operationId: put-company
+      summary: Update company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyUpdateResponse'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - companies
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanyUpdateInput'
+      security:
+        - ApiKeyAuth: []
   /csrf:
     get:
       operationId: get-csrf
@@ -114,6 +175,27 @@ paths:
         - csrf
 components:
   schemas:
+    Company:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        logoUrl:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+        siteUrl:
+          type: string
+        employeeCount:
+          type: integer
+        industryId:
+          type: integer
+      title: Company
     CompanySignInInput:
       type: object
       required:
@@ -180,6 +262,70 @@ components:
           items:
             type: string
       title: Company SignUp Validation Error
+    CompanyUpdateInput:
+      type: object
+      properties:
+        name:
+          type: string
+        logo:
+          type: string
+          format: binary
+        email:
+          type: string
+        address:
+          type: string
+        siteUrl:
+          type: string
+        employeeCount:
+          type: integer
+        industryId:
+          type: integer
+      required:
+        - name
+        - email
+    CompanyUpdateResponse:
+      type: object
+      required:
+        - company
+        - errors
+      properties:
+        company:
+          $ref: '#/components/schemas/Company'
+        errors:
+          $ref: '#/components/schemas/CompanyUpdateValidationError'
+      title: Company Update Response
+    CompanyUpdateValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        logo:
+          type: array
+          items:
+            type: string
+        email:
+          type: array
+          items:
+            type: string
+        address:
+          type: array
+          items:
+            type: string
+        siteUrl:
+          type: array
+          items:
+            type: string
+        employeeCount:
+          type: array
+          items:
+            type: string
+        industryId:
+          type: array
+          items:
+            type: string
+      title: Company Update Validation Error
     CsrfResponse:
       type: object
       required:
@@ -188,6 +334,11 @@ components:
         csrfToken:
           type: string
       title: CsrfResponse
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: cookie
+      name: businessToken
 servers:
   - url: https://localhost:4000
     variables: {}

@@ -2,22 +2,22 @@ import "@typespec/http";
 
 using Http;
 
-alias SecuritySchema = ApiKeyAuth<ApiKeyLocation.cookie, "token">;
+alias SecuritySchema = ApiKeyAuth<ApiKeyLocation.cookie, "businessToken">;
 
 model SuccessResponse<T> {
   @statusCode status: 200;
-  @body body: T
+  @bodyRoot body: T
 }
 
 model SuccessResponseWithHeader<T> {
   @statusCode status: 200;
-  @body body: T;
+  @bodyRoot body: T;
   @header("Set-Cookie") token: string;
 }
 
 model BadRequestErrorResponse<T> {
   @statusCode status: 400;
-  @body body: T
+  @bodyRoot body: T
 }
 
 model ForBiddenErrorResponse {

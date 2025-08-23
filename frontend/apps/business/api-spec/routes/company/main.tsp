@@ -10,7 +10,7 @@ using OpenAPI;
 
 @tag("companies")
 @route("/companies")
-namespace BusinessService.Company {
+namespace BusinessService.CompanyRoutes {
   interface ValidateSignUp {
     @route("/validate-sign-up")
     @operationId("post-company-validate-sign-up")
@@ -46,6 +46,31 @@ namespace BusinessService.Company {
       @body body: CompanySignInInput,
     ): SuccessResponseWithHeader<CompanySignInResponse>
       | BadRequestErrorResponse<CompanySignInResponse>
+      | InternalServerErrorResponse;
+  }
+
+  @route("/{id}")
+  @useAuth([SecuritySchema])
+  interface Id {
+    @operationId("get-company")
+    @summary("Show Company")
+    @get
+    get(
+      @path id: string,
+    ): SuccessResponse<Company>
+      | NotFoundErrorResponse
+      | InternalServerErrorResponse;
+
+    @operationId("put-company")
+    @summary("Update company")
+    @put
+    put(
+      @path id: string,
+      @header contentType: "multipart/form-data",
+      @multipartBody body: CompanyUpdateInput,
+    ): SuccessResponse<CompanyUpdateResponse>
+      | BadRequestErrorResponse<CompanyUpdateResponse>
+      | NotFoundErrorResponse
       | InternalServerErrorResponse;
   }
 }
