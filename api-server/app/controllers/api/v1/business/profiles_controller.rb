@@ -12,7 +12,13 @@ class Api::V1::Business::ProfilesController < Api::V1::Business::BaseController
     if @company.invalid?
       render json: { errors: format_errors(@company.errors), company: Serializer.call(CompanySerializer, @company) }, status: :bad_request
     else
-      @company.save!
+      ActiveRecord::Base.transaction do
+        if permitted_params[:logo].blank? && @company.logo.present?
+          @company.logo_attacher.destroy
+          @company.logo = nil
+        end
+        @company.save!
+      end
       render json: { errors: {}, company: Serializer.call(CompanySerializer, @company) }
     end
   end

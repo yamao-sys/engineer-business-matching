@@ -18,7 +18,7 @@ Shrine.storages = {
 
 Shrine.plugin :activerecord
 Shrine.plugin :cached_attachment_data
-Shrine.plugin :download_endpoint, host: ENV["S3_HOST"]
+Shrine.plugin :download_endpoint, host: "http://localhost:4566"
 Shrine.plugin :restore_cached_data # NOTE: キャッシュからメタ情報復元
 Shrine.plugin :determine_mime_type # NOTE: MIMEタイプを自動判定
 Shrine.plugin :validation_helpers
