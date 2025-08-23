@@ -10,7 +10,7 @@ using OpenAPI;
 
 @tag("companies")
 @route("/companies")
-namespace BusinessService.Company {
+namespace BusinessService.CompanyRoutes {
   interface ValidateSignUp {
     @route("/validate-sign-up")
     @operationId("post-company-validate-sign-up")

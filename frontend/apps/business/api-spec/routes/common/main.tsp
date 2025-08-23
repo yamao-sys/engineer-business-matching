@@ -1,23 +1,32 @@
 import "@typespec/http";
+import "@typespec/openapi";
 
 using Http;
+using OpenAPI;
 
-alias SecuritySchema = ApiKeyAuth<ApiKeyLocation.cookie, "token">;
+alias SecuritySchema = ApiKeyAuth<ApiKeyLocation.cookie, "businessToken">;
+
+// 認証スキーマの定義
+model BusinessBearerAuth {
+  type: "apiKey"; // APIキー認証を使う（header指定可）
+  name: "Business-Authorization"; // ヘッダー名
+  in: "header"; // ヘッダーに入れる
+}
 
 model SuccessResponse<T> {
   @statusCode status: 200;
-  @body body: T
+  @bodyRoot body: T
 }
 
 model SuccessResponseWithHeader<T> {
   @statusCode status: 200;
-  @body body: T;
+  @bodyRoot body: T;
   @header("Set-Cookie") token: string;
 }
 
 model BadRequestErrorResponse<T> {
   @statusCode status: 400;
-  @body body: T
+  @bodyRoot body: T
 }
 
 model ForBiddenErrorResponse {

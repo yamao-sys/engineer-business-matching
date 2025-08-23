@@ -12,3 +12,7 @@ export * from "./companySignUpInput";
 export * from "./companySignUpResponse";
 export * from "./companySignUpValidationError";
 export * from "./csrfResponse";
+export * from "./profile";
+export * from "./profileUpdateInput";
+export * from "./profileUpdateResponse";
+export * from "./profileUpdateValidationError";
