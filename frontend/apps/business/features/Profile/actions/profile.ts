@@ -12,7 +12,10 @@ export const showProfile = async (): Promise<Profile> => {
     switch (res.status) {
       case 200:
         return res.data;
+      case 500:
+        throw new Error("Not Found", { cause: res.data });
       default:
+        console.error("Failed to show profile", res.status);
         throw new Error("Failed to show profile");
     }
   } catch (error) {

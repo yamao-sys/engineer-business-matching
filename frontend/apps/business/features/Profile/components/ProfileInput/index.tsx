@@ -27,7 +27,7 @@ const ProfileInput: FC = () => {
       email: data?.email,
       address: data?.address ?? "",
       siteUrl: data?.siteUrl ?? "",
-      employeeCount: data?.employeeCount,
+      employeeCount: data?.employeeCount ?? 0,
       industryId: data?.industryId,
     },
   });
@@ -121,7 +121,7 @@ const ProfileInput: FC = () => {
               label="従業員数"
               control={control}
               name="employeeCount"
-              type="number"
+              type="text"
               validationErrors={validationErrors.employeeCount ?? []}
             />
           </BaseBox>

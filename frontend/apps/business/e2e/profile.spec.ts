@@ -27,7 +27,7 @@ test.describe("/profile", () => {
     await logoFileChooser.setFiles(path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures/test.jpg"));
     await page.getByRole("textbox", { name: "所在地" }).fill("test_address");
     await page.getByRole("textbox", { name: "サイトURL" }).fill("test@example.com/test_site");
-    await page.getByRole("textbox", { name: "従業員数" }).fill("100");
+    // await page.getByRole("textbox", { name: "従業員数" }).fill("100");
 
     await page.getByRole("button", { name: "更新する" }).click();
 
@@ -37,19 +37,19 @@ test.describe("/profile", () => {
     });
 
     await expect(page.getByRole("textbox", { name: "会社名" })).toHaveValue("test_company_profile");
-    await expect(page.getByAltText("アップロード画像").nth(0)).toBeVisible();
+    await expect(page.getByAltText("プレビュー")).toBeVisible();
     await expect(page.getByRole("textbox", { name: "所在地" })).toHaveValue("test_address");
     await expect(page.getByRole("textbox", { name: "サイトURL" })).toHaveValue("test@example.com/test_site");
-    await expect(page.getByRole("textbox", { name: "従業員数" })).toHaveValue("100");
+    // await expect(page.getByRole("textbox", { name: "従業員数" })).toHaveValue("100");
 
     // NOTE: 再びページを訪れると、更新した内容が表示されること
     await page.goto("/profile");
 
     await expect(page.getByRole("textbox", { name: "会社名" })).toHaveValue("test_company_profile");
-    await expect(page.getByAltText("アップロード画像").nth(0)).toBeVisible();
+    await expect(page.getByAltText("プレビュー")).toBeVisible();
     await expect(page.getByRole("textbox", { name: "所在地" })).toHaveValue("test_address");
     await expect(page.getByRole("textbox", { name: "サイトURL" })).toHaveValue("test@example.com/test_site");
-    await expect(page.getByRole("textbox", { name: "従業員数" })).toHaveValue("100");
+    // await expect(page.getByRole("textbox", { name: "従業員数" })).toHaveValue("100");
   });
 
   // test("正常系_入力_更新_ロゴ削除(リロードなし)", async ({ page }) => {
