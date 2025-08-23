@@ -6,9 +6,9 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface CompanyUpdateInput {
+export interface Profile {
   name: string;
-  logo?: Blob;
+  logoUrl?: string;
   email: string;
   address?: string;
   siteUrl?: string;

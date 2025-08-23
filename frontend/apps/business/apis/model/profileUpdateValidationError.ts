@@ -6,7 +6,7 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface CompanyUpdateValidationError {
+export interface ProfileUpdateValidationError {
   name?: string[];
   logo?: string[];
   email?: string[];

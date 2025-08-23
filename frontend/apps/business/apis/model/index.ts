@@ -6,13 +6,13 @@
  * OpenAPI spec version: 1.0
  */
 
-export * from "./company";
 export * from "./companySignInInput";
 export * from "./companySignInResponse";
 export * from "./companySignUpInput";
 export * from "./companySignUpResponse";
 export * from "./companySignUpValidationError";
-export * from "./companyUpdateInput";
-export * from "./companyUpdateResponse";
-export * from "./companyUpdateValidationError";
 export * from "./csrfResponse";
+export * from "./profile";
+export * from "./profileUpdateInput";
+export * from "./profileUpdateResponse";
+export * from "./profileUpdateValidationError";
