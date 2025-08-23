@@ -47,6 +47,21 @@ jobs:
       - name: Make Test Bucket on LocalStack
         run: |
           awslocal s3 mb s3://engineer-business-matching-test
+          aws --endpoint-url=http://127.0.0.1:4566 \
+            s3api put-bucket-cors \
+            --no-sign-request \
+            --bucket engineer-business-matching-test \
+            --cors-configuration '{
+              "CORSRules": [
+                  {
+                      "AllowedHeaders": ["*"],
+                      "AllowedMethods": ["GET", "PUT", "POST"],
+                      "AllowedOrigins": ["http://localhost:3000", "http://localhost:3001"],
+                      "ExposeHeaders": ["Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers"],
+                      "MaxAgeSeconds": 3000
+                  }
+              ]
+          }'
 
       - name: Boot API Server
         working-directory: ./api-server
