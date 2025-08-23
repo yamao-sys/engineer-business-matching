@@ -6,6 +6,7 @@ info:
 tags:
   - name: companies
   - name: csrf
+  - name: profiles
 paths:
   /companies/sign-in:
     post:
@@ -96,67 +97,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CompanySignUpInput'
-  /companies/{id}:
-    get:
-      operationId: get-company
-      summary: Show Company
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Company'
-        '404':
-          description: The server cannot find the requested resource.
-        '500':
-          description: Server error
-      tags:
-        - companies
-      security:
-        - ApiKeyAuth: []
-    put:
-      operationId: put-company
-      summary: Update company
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CompanyUpdateResponse'
-        '400':
-          description: The server could not understand the request due to invalid syntax.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CompanyUpdateResponse'
-        '404':
-          description: The server cannot find the requested resource.
-        '500':
-          description: Server error
-      tags:
-        - companies
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CompanyUpdateInput'
-      security:
-        - ApiKeyAuth: []
   /csrf:
     get:
       operationId: get-csrf
@@ -173,29 +113,59 @@ paths:
           description: Server error
       tags:
         - csrf
+  /profiles:
+    get:
+      operationId: get-profile
+      summary: Show Profile
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - profiles
+      security:
+        - BusinessBearerAuth: []
+    put:
+      operationId: put-profile
+      summary: Update profile
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileUpdateResponse'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - profiles
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdateInput'
+      security:
+        - BusinessBearerAuth: []
 components:
   schemas:
-    Company:
-      type: object
-      required:
-        - name
-        - email
-      properties:
-        name:
-          type: string
-        logoUrl:
-          type: string
-        email:
-          type: string
-        address:
-          type: string
-        siteUrl:
-          type: string
-        employeeCount:
-          type: integer
-        industryId:
-          type: integer
-      title: Company
     CompanySignInInput:
       type: object
       required:
@@ -262,7 +232,36 @@ components:
           items:
             type: string
       title: Company SignUp Validation Error
-    CompanyUpdateInput:
+    CsrfResponse:
+      type: object
+      required:
+        - csrfToken
+      properties:
+        csrfToken:
+          type: string
+      title: CsrfResponse
+    Profile:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        logoUrl:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+        siteUrl:
+          type: string
+        employeeCount:
+          type: integer
+        industryId:
+          type: integer
+      title: Profile
+    ProfileUpdateInput:
       type: object
       properties:
         name:
@@ -283,18 +282,18 @@ components:
       required:
         - name
         - email
-    CompanyUpdateResponse:
+    ProfileUpdateResponse:
       type: object
       required:
-        - company
+        - profile
         - errors
       properties:
-        company:
-          $ref: '#/components/schemas/Company'
+        profile:
+          $ref: '#/components/schemas/Profile'
         errors:
-          $ref: '#/components/schemas/CompanyUpdateValidationError'
-      title: Company Update Response
-    CompanyUpdateValidationError:
+          $ref: '#/components/schemas/ProfileUpdateValidationError'
+      title: Profile Update Response
+    ProfileUpdateValidationError:
       type: object
       properties:
         name:
@@ -325,20 +324,12 @@ components:
           type: array
           items:
             type: string
-      title: Company Update Validation Error
-    CsrfResponse:
-      type: object
-      required:
-        - csrfToken
-      properties:
-        csrfToken:
-          type: string
-      title: CsrfResponse
+      title: Profile Update Validation Error
   securitySchemes:
-    ApiKeyAuth:
+    BusinessBearerAuth:
       type: apiKey
-      in: cookie
-      name: businessToken
+      in: header
+      name: Business-Authorization
 servers:
   - url: https://localhost:4000
     variables: {}

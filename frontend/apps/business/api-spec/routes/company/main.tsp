@@ -48,29 +48,4 @@ namespace BusinessService.CompanyRoutes {
       | BadRequestErrorResponse<CompanySignInResponse>
       | InternalServerErrorResponse;
   }
-
-  @route("/{id}")
-  @useAuth([SecuritySchema])
-  interface Id {
-    @operationId("get-company")
-    @summary("Show Company")
-    @get
-    get(
-      @path id: string,
-    ): SuccessResponse<Company>
-      | NotFoundErrorResponse
-      | InternalServerErrorResponse;
-
-    @operationId("put-company")
-    @summary("Update company")
-    @put
-    put(
-      @path id: string,
-      @header contentType: "multipart/form-data",
-      @multipartBody body: CompanyUpdateInput,
-    ): SuccessResponse<CompanyUpdateResponse>
-      | BadRequestErrorResponse<CompanyUpdateResponse>
-      | NotFoundErrorResponse
-      | InternalServerErrorResponse;
-  }
 }

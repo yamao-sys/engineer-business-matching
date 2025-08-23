@@ -1,8 +1,17 @@
 import "@typespec/http";
+import "@typespec/openapi";
 
 using Http;
+using OpenAPI;
 
 alias SecuritySchema = ApiKeyAuth<ApiKeyLocation.cookie, "businessToken">;
+
+// 認証スキーマの定義
+model BusinessBearerAuth {
+  type: "apiKey"; // APIキー認証を使う（header指定可）
+  name: "Business-Authorization"; // ヘッダー名
+  in: "header"; // ヘッダーに入れる
+}
 
 model SuccessResponse<T> {
   @statusCode status: 200;
