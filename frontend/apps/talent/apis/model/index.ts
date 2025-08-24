@@ -11,3 +11,7 @@ export * from "./engineerSignInResponse";
 export * from "./engineerSignUpInput";
 export * from "./engineerSignUpResponse";
 export * from "./engineerSignUpValidationError";
+export * from "./profile";
+export * from "./profileUpdateInput";
+export * from "./profileUpdateResponse";
+export * from "./profileUpdateValidationError";
