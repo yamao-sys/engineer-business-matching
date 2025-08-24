@@ -2,7 +2,12 @@ import "@typespec/http";
 
 using Http;
 
-alias SecuritySchema = ApiKeyAuth<ApiKeyLocation.cookie, "token">;
+// 認証スキーマの定義
+model TalentBearerAuth {
+  type: "apiKey"; // APIキー認証を使う（header指定可）
+  name: "Talent-Authorization"; // ヘッダー名
+  in: "header"; // ヘッダーに入れる
+}
 
 model SuccessResponse<T> {
   @statusCode status: 200;
