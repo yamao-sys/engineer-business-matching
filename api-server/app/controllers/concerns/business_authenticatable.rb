@@ -2,7 +2,7 @@ module BusinessAuthenticatable
   extend ActiveSupport::Concern
 
   def business_authenticate
-    authorization_header = request.headers[:business_authorization]
+    authorization_header = request.headers["Business-Authorization"]
     if authorization_header.blank?
       render status: :unauthorized
     else
