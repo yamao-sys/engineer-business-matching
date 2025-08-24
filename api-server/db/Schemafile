@@ -26,6 +26,9 @@ create_table "engineers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", f
   t.date "birthday", null: false
   t.text "front_identification_data"
   t.text "back_identification_data"
+  t.string "current_employer"
+  t.string "tel"
+  t.string "address"
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
   t.index [ "email" ], name: "index_engineers_on_email"
