@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import BaseContainer from "@repo/ui/BaseContainer/index";
+import TanstackQueryProvider from "@/lib/tanstackQueryProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,12 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="p-4 md:p-16">
-          <BaseContainer containerWidth="w-4/5">{children}</BaseContainer>
-        </div>
-      </body>
-    </html>
+    <TanstackQueryProvider>
+      <html>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <div className="p-4 md:p-16">
+            <BaseContainer containerWidth="w-4/5">{children}</BaseContainer>
+          </div>
+        </body>
+      </html>
+    </TanstackQueryProvider>
   );
 }
