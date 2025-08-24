@@ -48,7 +48,7 @@ export type getProfileResponse = getProfileResponseComposite & {
 };
 
 export const getGetProfileUrl = () => {
-  return `/profiles`;
+  return `/profile`;
 };
 
 export const getProfile = async (options?: RequestInit): Promise<getProfileResponse> => {
@@ -59,7 +59,7 @@ export const getProfile = async (options?: RequestInit): Promise<getProfileRespo
 };
 
 export const getGetProfileQueryKey = () => {
-  return [`/profiles`] as const;
+  return [`/profile`] as const;
 };
 
 export const getGetProfileQueryOptions = <TData = Awaited<ReturnType<typeof getProfile>>, TError = null | null>(options?: {
@@ -125,7 +125,7 @@ export type putProfileResponse = putProfileResponseComposite & {
 };
 
 export const getPutProfileUrl = () => {
-  return `/profiles`;
+  return `/profile`;
 };
 
 export const putProfile = async (profileUpdateInput: ProfileUpdateInput, options?: RequestInit): Promise<putProfileResponse> => {

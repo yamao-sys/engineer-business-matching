@@ -8,8 +8,8 @@ import "../common";
 using Http;
 using OpenAPI;
 
-@tag("profiles")
-@route("/profiles")
+@tag("profile")
+@route("/profile")
 @useAuth([BusinessBearerAuth])
 namespace BusinessService.ProfileRoutes {
   interface Root {
