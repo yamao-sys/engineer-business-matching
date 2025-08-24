@@ -5,6 +5,7 @@ info:
   description: talent APIs
 tags:
   - name: engineers
+  - name: profile
 paths:
   /engineers/sign-in:
     post:
@@ -95,6 +96,57 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/EngineerSignUpInput'
+  /profile:
+    get:
+      operationId: get-profile
+      summary: Show Profile
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - profile
+      security:
+        - TalentBearerAuth: []
+    put:
+      operationId: put-profile
+      summary: Update profile
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileUpdateResponse'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdateInput'
+      security:
+        - TalentBearerAuth: []
 components:
   schemas:
     EngineerSignInInput:
@@ -187,6 +239,90 @@ components:
           items:
             type: string
       title: Engineer SignUp Validation Error
+    Profile:
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: string
+        currentEmployer:
+          type: string
+        tel:
+          type: string
+      title: Profile
+    ProfileUpdateInput:
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: string
+        currentEmployer:
+          type: string
+        tel:
+          type: string
+      title: Profile
+    ProfileUpdateResponse:
+      type: object
+      required:
+        - profile
+        - errors
+      properties:
+        profile:
+          $ref: '#/components/schemas/Profile'
+        errors:
+          $ref: '#/components/schemas/ProfileUpdateValidationError'
+      title: Profile Update Response
+    ProfileUpdateValidationError:
+      type: object
+      properties:
+        firstName:
+          type: array
+          items:
+            type: string
+        lastName:
+          type: array
+          items:
+            type: string
+        birthday:
+          type: array
+          items:
+            type: string
+        address:
+          type: array
+          items:
+            type: string
+        currentEmployer:
+          type: array
+          items:
+            type: string
+        tel:
+          type: array
+          items:
+            type: string
+      title: Profile Update Validation Error
+  securitySchemes:
+    TalentBearerAuth:
+      type: apiKey
+      in: header
+      name: Talent-Authorization
 servers:
   - url: https://localhost:4000
     variables: {}
