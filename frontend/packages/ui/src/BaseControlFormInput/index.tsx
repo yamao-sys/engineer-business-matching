@@ -19,7 +19,7 @@ function BaseControlFormInputInner<T extends FieldValues>({ id, type = "text", l
       render={({ field }) => {
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           const value = e.target.value;
-          const parsedValue = type === "number" ? (value === "" ? undefined : Number(value)) : value;
+          const parsedValue = type === "number" ? (value === "" ? 0 : Number(value)) : value;
           field.onChange(parsedValue);
         };
 
@@ -29,7 +29,7 @@ function BaseControlFormInputInner<T extends FieldValues>({ id, type = "text", l
             label={label}
             type={type}
             {...field}
-            value={field.value ?? ""}
+            value={field.value}
             onChange={handleChange}
             validationErrorMessages={validationErrors}
           />
