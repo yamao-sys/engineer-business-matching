@@ -8,8 +8,6 @@ import SignUpThanks from "../SignUpThanks";
 import { PhaseType } from "@/features/signUp/types";
 import { FormProvider, useForm } from "react-hook-form";
 import { EngineerSignUpInput } from "@/apis/model";
-import { createQueryClient } from "../../../../../../libs/queryFactory";
-import { QueryClientProvider } from "@tanstack/react-query";
 
 const SignUpForm: FC = () => {
   const [phase, setPhase] = useState<PhaseType>("input");
@@ -28,8 +26,6 @@ const SignUpForm: FC = () => {
     },
   });
 
-  const queryClient = createQueryClient();
-
   const phaseComponent = () => {
     switch (phase) {
       case "input":
@@ -43,9 +39,7 @@ const SignUpForm: FC = () => {
 
   return (
     <SignUpLayout phase={phase}>
-      <QueryClientProvider client={queryClient}>
-        <FormProvider {...formMethods}>{phaseComponent()}</FormProvider>
-      </QueryClientProvider>
+      <FormProvider {...formMethods}>{phaseComponent()}</FormProvider>
     </SignUpLayout>
   );
 };
