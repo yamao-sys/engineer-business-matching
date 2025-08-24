@@ -20,10 +20,10 @@ RSpec.describe Api::V1::Business::ProfilesController, type: :request do
         expect(res_body[:id]).to eq(company.id)
         expect(res_body[:name]).to eq(company.name)
         expect(res_body[:email]).to eq(company.email)
-        expect(res_body[:logo]).to be_present
+        expect(res_body[:logoUrl]).to be_present
         expect(res_body[:address]).to eq(company.address)
-        expect(res_body[:site_url]).to eq(company.site_url)
-        expect(res_body[:employee_count]).to eq(company.employee_count)
+        expect(res_body[:siteUrl]).to eq(company.site_url)
+        expect(res_body[:employeeCount]).to eq(company.employee_count)
         expect(res_body[:industry][:id]).to eq(industry.id)
         expect(res_body[:industry][:name]).to eq(industry.name)
       end

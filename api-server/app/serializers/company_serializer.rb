@@ -3,13 +3,15 @@
 class CompanySerializer < ActiveModel::Serializer
   include JSONAPI::Serializer
 
-  attributes :id, :name, :email, :logo, :address, :site_url, :employee_count, :industry
+  attributes :id, :name, :email, :address, :industry
+  attribute :siteUrl, &:site_url
+  attribute :employeeCount, &:employee_count
 
-  def logo
-    object.logo.url
+  attribute :logoUrl do |object|
+    object.logo&.url
   end
 
-  def industry
+  attribute :industry do |object|
     Serializer.call(IndustrySerializer, object.industry) if object.industry.present?
   end
 end
