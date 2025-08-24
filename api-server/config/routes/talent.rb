@@ -11,6 +11,8 @@ Rails.application.routes.draw do
             post "sign-in", to: "engineers#sign_in"
           end
         end
+
+        resource :profile, only: [ :show, :update ]
       end
     end
   end
