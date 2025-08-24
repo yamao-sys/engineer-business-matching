@@ -11,3 +11,6 @@ ja:
         birthday: 生年月日
         front_identification: 本人確認書類(表面)
         back_identification: 本人確認書類(裏面)
+        current_employer: 現在の雇用先
+        tel: 電話番号
+        address: 居住地
