@@ -2,7 +2,7 @@ module TalentAuthenticatable
   extend ActiveSupport::Concern
 
   def talent_authenticate
-    authorization_header = request.headers[:talent_authorization]
+    authorization_header = request.headers["Talent-Authorization"]
     if authorization_header.blank?
       render status: :unauthorized
     else
