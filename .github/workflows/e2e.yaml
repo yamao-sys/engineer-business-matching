@@ -65,6 +65,8 @@ jobs:
 
       - name: Boot API Server
         working-directory: ./api-server
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
           rm -f tmp/pids/server.pid
           bundle exec rails s -e test -p 4100 -b '0.0.0.0' &
