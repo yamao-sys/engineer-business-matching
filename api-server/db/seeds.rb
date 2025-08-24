@@ -7,3 +7,6 @@ Company.create!(name: "test_company_profile_4", email: "test_company_profile_4@e
 Company.create!(name: "test_company_profile_5", email: "test_company_profile_5@example.com", password: "password")
 
 Engineer.create!(first_name: "test_engineer_sign_in", last_name: "test_engineer_sign_in", email: "test_engineer_sign_in@example.com", password: "password", birthday: "1990-01-01")
+
+Engineer.create!(first_name: "test_engineer_profile", last_name: "test_engineer_profile", email: "test_engineer_profile@example.com", password: "password", birthday: "1990-01-01")
+Engineer.create!(first_name: "test_engineer_profile_2", last_name: "test_engineer_profile_2", email: "test_engineer_profile_2@example.com", password: "password", birthday: "1990-01-01")
