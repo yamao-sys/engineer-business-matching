@@ -356,10 +356,13 @@ components:
     CompanyProduct:
       type: object
       required:
+        - id
         - name
         - description
         - url
       properties:
+        id:
+          type: string
         name:
           type: string
         description:
