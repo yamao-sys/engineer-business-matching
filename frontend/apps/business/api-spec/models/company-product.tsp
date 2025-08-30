@@ -17,6 +17,7 @@ model CompanyProductUpdateInput {
 
 @summary("CompanyProduct")
 model CompanyProduct {
+  id: string;
   name: string;
   description: string;
   url: string;
