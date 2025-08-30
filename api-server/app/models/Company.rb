@@ -4,7 +4,7 @@ class Company < ApplicationRecord
   belongs_to :industry, optional: true
 
   has_one :company_story, dependent: :destroy
-  has_one :company_product, dependent: :destroy
+  has_many :company_products, dependent: :destroy
 
   has_attached_file :final_tax_return
   has_attached_file :logo
