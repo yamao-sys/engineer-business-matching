@@ -6,6 +6,10 @@
  * OpenAPI spec version: 1.0
  */
 
+export * from "./companyProduct";
+export * from "./companyProductUpdateInput";
+export * from "./companyProductUpdateResponse";
+export * from "./companyProductUpdateValidationError";
 export * from "./companySignInInput";
 export * from "./companySignInResponse";
 export * from "./companySignUpInput";
