@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      company_product: 企業製品
+    attributes:
+      company_product:
+        name: 名前
+        description: 説明
+        url: URL
+        logo: ロゴ
