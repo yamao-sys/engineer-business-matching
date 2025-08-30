@@ -24,6 +24,150 @@ import { customFormData } from "../../../../packages/orval-config/custom-form-da
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 /**
+ * @summary Fetch CompanyProducts
+ */
+export type getCompanyProductsResponse200 = {
+  data: CompanyProduct[];
+  status: 200;
+};
+
+export type getCompanyProductsResponse500 = {
+  data: null;
+  status: 500;
+};
+
+export type getCompanyProductsResponseComposite = getCompanyProductsResponse200 | getCompanyProductsResponse500;
+
+export type getCompanyProductsResponse = getCompanyProductsResponseComposite & {
+  headers: Headers;
+};
+
+export const getGetCompanyProductsUrl = () => {
+  return `/company-products/`;
+};
+
+export const getCompanyProducts = async (options?: RequestInit): Promise<getCompanyProductsResponse> => {
+  return customFetch<getCompanyProductsResponse>(getGetCompanyProductsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetCompanyProductsQueryKey = () => {
+  return [`/company-products/`] as const;
+};
+
+export const getGetCompanyProductsQueryOptions = <TData = Awaited<ReturnType<typeof getCompanyProducts>>, TError = null>(options?: {
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getCompanyProducts>>, TError, TData>;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetCompanyProductsQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCompanyProducts>>> = ({ signal }) => getCompanyProducts({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<Awaited<ReturnType<typeof getCompanyProducts>>, TError, TData> & {
+    queryKey: QueryKey;
+  };
+};
+
+export type GetCompanyProductsQueryResult = NonNullable<Awaited<ReturnType<typeof getCompanyProducts>>>;
+export type GetCompanyProductsQueryError = null;
+
+/**
+ * @summary Fetch CompanyProducts
+ */
+
+export function useGetCompanyProducts<TData = Awaited<ReturnType<typeof getCompanyProducts>>, TError = null>(options?: {
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getCompanyProducts>>, TError, TData>;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetCompanyProductsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+}
+
+/**
+ * @summary Create CompanyProduct
+ */
+export type postCompanyProductResponse200 = {
+  data: CompanyProductUpdateResponse;
+  status: 200;
+};
+
+export type postCompanyProductResponse400 = {
+  data: CompanyProductUpdateResponse;
+  status: 400;
+};
+
+export type postCompanyProductResponse500 = {
+  data: null;
+  status: 500;
+};
+
+export type postCompanyProductResponseComposite = postCompanyProductResponse200 | postCompanyProductResponse400 | postCompanyProductResponse500;
+
+export type postCompanyProductResponse = postCompanyProductResponseComposite & {
+  headers: Headers;
+};
+
+export const getPostCompanyProductUrl = () => {
+  return `/company-products/`;
+};
+
+export const postCompanyProduct = async (
+  companyProductUpdateInput: CompanyProductUpdateInput,
+  options?: RequestInit,
+): Promise<postCompanyProductResponse> => {
+  const formData = customFormData(companyProductUpdateInput);
+  return customFetch<postCompanyProductResponse>(getPostCompanyProductUrl(), {
+    ...options,
+    method: "POST",
+    body: formData,
+  });
+};
+
+export const getPostCompanyProductMutationOptions = <TError = CompanyProductUpdateResponse | null, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof postCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext>;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<Awaited<ReturnType<typeof postCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext> => {
+  const mutationKey = ["postCompanyProduct"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof postCompanyProduct>>, { data: CompanyProductUpdateInput }> = (props) => {
+    const { data } = props ?? {};
+
+    return postCompanyProduct(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PostCompanyProductMutationResult = NonNullable<Awaited<ReturnType<typeof postCompanyProduct>>>;
+export type PostCompanyProductMutationBody = CompanyProductUpdateInput;
+export type PostCompanyProductMutationError = CompanyProductUpdateResponse | null;
+
+/**
+ * @summary Create CompanyProduct
+ */
+export const usePostCompanyProduct = <TError = CompanyProductUpdateResponse | null, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof postCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext>;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<Awaited<ReturnType<typeof postCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext> => {
+  const mutationOptions = getPostCompanyProductMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+/**
  * @summary Show CompanyProduct
  */
 export type getCompanyProductResponse200 = {
@@ -47,32 +191,32 @@ export type getCompanyProductResponse = getCompanyProductResponseComposite & {
   headers: Headers;
 };
 
-export const getGetCompanyProductUrl = () => {
-  return `/company-products`;
+export const getGetCompanyProductUrl = (id: string) => {
+  return `/company-products/${id}`;
 };
 
-export const getCompanyProduct = async (options?: RequestInit): Promise<getCompanyProductResponse> => {
-  return customFetch<getCompanyProductResponse>(getGetCompanyProductUrl(), {
+export const getCompanyProduct = async (id: string, options?: RequestInit): Promise<getCompanyProductResponse> => {
+  return customFetch<getCompanyProductResponse>(getGetCompanyProductUrl(id), {
     ...options,
     method: "GET",
   });
 };
 
-export const getGetCompanyProductQueryKey = () => {
-  return [`/company-products`] as const;
+export const getGetCompanyProductQueryKey = (id?: string) => {
+  return [`/company-products/${id}`] as const;
 };
 
-export const getGetCompanyProductQueryOptions = <TData = Awaited<ReturnType<typeof getCompanyProduct>>, TError = null | null>(options?: {
-  query?: UseQueryOptions<Awaited<ReturnType<typeof getCompanyProduct>>, TError, TData>;
-  request?: SecondParameter<typeof customFetch>;
-}) => {
+export const getGetCompanyProductQueryOptions = <TData = Awaited<ReturnType<typeof getCompanyProduct>>, TError = null | null>(
+  id: string,
+  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getCompanyProduct>>, TError, TData>; request?: SecondParameter<typeof customFetch> },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetCompanyProductQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetCompanyProductQueryKey(id);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCompanyProduct>>> = ({ signal }) => getCompanyProduct({ signal, ...requestOptions });
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCompanyProduct>>> = ({ signal }) => getCompanyProduct(id, { signal, ...requestOptions });
 
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<Awaited<ReturnType<typeof getCompanyProduct>>, TError, TData> & {
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<Awaited<ReturnType<typeof getCompanyProduct>>, TError, TData> & {
     queryKey: QueryKey;
   };
 };
@@ -84,11 +228,11 @@ export type GetCompanyProductQueryError = null | null;
  * @summary Show CompanyProduct
  */
 
-export function useGetCompanyProduct<TData = Awaited<ReturnType<typeof getCompanyProduct>>, TError = null | null>(options?: {
-  query?: UseQueryOptions<Awaited<ReturnType<typeof getCompanyProduct>>, TError, TData>;
-  request?: SecondParameter<typeof customFetch>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetCompanyProductQueryOptions(options);
+export function useGetCompanyProduct<TData = Awaited<ReturnType<typeof getCompanyProduct>>, TError = null | null>(
+  id: string,
+  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getCompanyProduct>>, TError, TData>; request?: SecondParameter<typeof customFetch> },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetCompanyProductQueryOptions(id, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
@@ -130,16 +274,17 @@ export type putCompanyProductResponse = putCompanyProductResponseComposite & {
   headers: Headers;
 };
 
-export const getPutCompanyProductUrl = () => {
-  return `/company-products`;
+export const getPutCompanyProductUrl = (id: string) => {
+  return `/company-products/${id}`;
 };
 
 export const putCompanyProduct = async (
+  id: string,
   companyProductUpdateInput: CompanyProductUpdateInput,
   options?: RequestInit,
 ): Promise<putCompanyProductResponse> => {
   const formData = customFormData(companyProductUpdateInput);
-  return customFetch<putCompanyProductResponse>(getPutCompanyProductUrl(), {
+  return customFetch<putCompanyProductResponse>(getPutCompanyProductUrl(id), {
     ...options,
     method: "PUT",
     body: formData,
@@ -147,9 +292,9 @@ export const putCompanyProduct = async (
 };
 
 export const getPutCompanyProductMutationOptions = <TError = CompanyProductUpdateResponse | null | null, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext>;
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { id: string; data: CompanyProductUpdateInput }, TContext>;
   request?: SecondParameter<typeof customFetch>;
-}): UseMutationOptions<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { id: string; data: CompanyProductUpdateInput }, TContext> => {
   const mutationKey = ["putCompanyProduct"];
   const { mutation: mutationOptions, request: requestOptions } = options
     ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
@@ -157,10 +302,10 @@ export const getPutCompanyProductMutationOptions = <TError = CompanyProductUpdat
       : { ...options, mutation: { ...options.mutation, mutationKey } }
     : { mutation: { mutationKey }, request: undefined };
 
-  const mutationFn: MutationFunction<Awaited<ReturnType<typeof putCompanyProduct>>, { data: CompanyProductUpdateInput }> = (props) => {
-    const { data } = props ?? {};
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof putCompanyProduct>>, { id: string; data: CompanyProductUpdateInput }> = (props) => {
+    const { id, data } = props ?? {};
 
-    return putCompanyProduct(data, requestOptions);
+    return putCompanyProduct(id, data, requestOptions);
   };
 
   return { mutationFn, ...mutationOptions };
@@ -174,10 +319,83 @@ export type PutCompanyProductMutationError = CompanyProductUpdateResponse | null
  * @summary Update CompanyProduct
  */
 export const usePutCompanyProduct = <TError = CompanyProductUpdateResponse | null | null, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext>;
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { id: string; data: CompanyProductUpdateInput }, TContext>;
   request?: SecondParameter<typeof customFetch>;
-}): UseMutationResult<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { data: CompanyProductUpdateInput }, TContext> => {
+}): UseMutationResult<Awaited<ReturnType<typeof putCompanyProduct>>, TError, { id: string; data: CompanyProductUpdateInput }, TContext> => {
   const mutationOptions = getPutCompanyProductMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+/**
+ * @summary Delete CompanyProduct
+ */
+export type deleteCompanyProductResponse200 = {
+  data: CompanyProduct;
+  status: 200;
+};
+
+export type deleteCompanyProductResponse404 = {
+  data: null;
+  status: 404;
+};
+
+export type deleteCompanyProductResponse500 = {
+  data: null;
+  status: 500;
+};
+
+export type deleteCompanyProductResponseComposite =
+  | deleteCompanyProductResponse200
+  | deleteCompanyProductResponse404
+  | deleteCompanyProductResponse500;
+
+export type deleteCompanyProductResponse = deleteCompanyProductResponseComposite & {
+  headers: Headers;
+};
+
+export const getDeleteCompanyProductUrl = (id: string) => {
+  return `/company-products/${id}`;
+};
+
+export const deleteCompanyProduct = async (id: string, options?: RequestInit): Promise<deleteCompanyProductResponse> => {
+  return customFetch<deleteCompanyProductResponse>(getDeleteCompanyProductUrl(id), {
+    ...options,
+    method: "DELETE",
+  });
+};
+
+export const getDeleteCompanyProductMutationOptions = <TError = null | null, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteCompanyProduct>>, TError, { id: string }, TContext>;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<Awaited<ReturnType<typeof deleteCompanyProduct>>, TError, { id: string }, TContext> => {
+  const mutationKey = ["deleteCompanyProduct"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteCompanyProduct>>, { id: string }> = (props) => {
+    const { id } = props ?? {};
+
+    return deleteCompanyProduct(id, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type DeleteCompanyProductMutationResult = NonNullable<Awaited<ReturnType<typeof deleteCompanyProduct>>>;
+
+export type DeleteCompanyProductMutationError = null | null;
+
+/**
+ * @summary Delete CompanyProduct
+ */
+export const useDeleteCompanyProduct = <TError = null | null, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteCompanyProduct>>, TError, { id: string }, TContext>;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<Awaited<ReturnType<typeof deleteCompanyProduct>>, TError, { id: string }, TContext> => {
+  const mutationOptions = getDeleteCompanyProductMutationOptions(options);
 
   return useMutation(mutationOptions);
 };
