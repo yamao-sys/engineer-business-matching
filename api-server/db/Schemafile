@@ -48,3 +48,14 @@ create_table "company_stories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_
   t.datetime "updated_at", null: false
   t.index [ "company_id" ], name: "index_company_stories_on_company_id"
 end
+
+create_table "company_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  t.bigint "company_id"
+  t.string "name", null: false
+  t.text "description"
+  t.text "url"
+  t.text "logo_data"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index [ "company_id" ], name: "index_company_products_on_company_id"
+end
