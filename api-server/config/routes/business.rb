@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
         resource :profile, only: [ :show, :update ]
         resource :company_story, path: "company-stories", only: [ :show, :update ]
-        resource :company_product, path: "company-products", only: [ :show, :update ]
+        resources :company_products, path: "company-products"
       end
     end
   end
