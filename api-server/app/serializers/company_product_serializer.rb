@@ -3,9 +3,9 @@
 class CompanyProductSerializer < ActiveModel::Serializer
   include JSONAPI::Serializer
 
-  attributes :name, :description, :url
+  attributes :id, :name, :description, :url
 
   attribute :logoUrl do |object|
-    object.logo&.url
+    object.logo&.url if object.persisted?
   end
 end
