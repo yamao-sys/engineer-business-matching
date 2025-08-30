@@ -5,6 +5,7 @@ info:
   description: business APIs
 tags:
   - name: companies
+  - name: CompanyStory
   - name: csrf
   - name: profile
 paths:
@@ -97,6 +98,57 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CompanySignUpInput'
+  /company-stories:
+    get:
+      operationId: get-company-story
+      summary: Show CompanyStory
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStory'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - CompanyStory
+      security:
+        - BusinessBearerAuth: []
+    put:
+      operationId: put-company-story
+      summary: Update CompanyStory
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStoryUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyStoryUpdateResponse'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - CompanyStory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyStoryUpdateInput'
+      security:
+        - BusinessBearerAuth: []
   /csrf:
     get:
       operationId: get-csrf
@@ -232,6 +284,51 @@ components:
           items:
             type: string
       title: Company SignUp Validation Error
+    CompanyStory:
+      type: object
+      required:
+        - mission
+        - vision
+      properties:
+        mission:
+          type: string
+        vision:
+          type: string
+      title: CompanyStory
+    CompanyStoryUpdateInput:
+      type: object
+      required:
+        - mission
+        - vision
+      properties:
+        mission:
+          type: string
+        vision:
+          type: string
+      title: CompanyStoryUpdateInput
+    CompanyStoryUpdateResponse:
+      type: object
+      required:
+        - companyStory
+        - errors
+      properties:
+        companyStory:
+          $ref: '#/components/schemas/CompanyStory'
+        errors:
+          $ref: '#/components/schemas/CompanyStoryUpdateValidationError'
+      title: CompanyStory Update Response
+    CompanyStoryUpdateValidationError:
+      type: object
+      properties:
+        mission:
+          type: array
+          items:
+            type: string
+        vision:
+          type: array
+          items:
+            type: string
+      title: CompanyStory Update Validation Error
     CsrfResponse:
       type: object
       required:
