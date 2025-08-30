@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         end
 
         resource :profile, only: [ :show, :update ]
+        resource :company_story, path: "company-stories", only: [ :show, :update ]
       end
     end
   end
