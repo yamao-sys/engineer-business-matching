@@ -5,6 +5,7 @@ info:
   description: business APIs
 tags:
   - name: companies
+  - name: CompanyProduct
   - name: CompanyStory
   - name: csrf
   - name: profile
@@ -98,6 +99,57 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CompanySignUpInput'
+  /company-products:
+    get:
+      operationId: get-company-product
+      summary: Show CompanyProduct
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyProduct'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - CompanyProduct
+      security:
+        - BusinessBearerAuth: []
+    put:
+      operationId: put-company-product
+      summary: Update CompanyProduct
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyProductUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyProductUpdateResponse'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - CompanyProduct
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanyProductUpdateInput'
+      security:
+        - BusinessBearerAuth: []
   /company-stories:
     get:
       operationId: get-company-story
@@ -218,6 +270,69 @@ paths:
         - BusinessBearerAuth: []
 components:
   schemas:
+    CompanyProduct:
+      type: object
+      required:
+        - name
+        - description
+        - url
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        logoUrl:
+          type: string
+      title: CompanyProduct
+    CompanyProductUpdateInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        logo:
+          type: string
+          format: binary
+      required:
+        - name
+        - description
+        - url
+    CompanyProductUpdateResponse:
+      type: object
+      required:
+        - companyProduct
+        - errors
+      properties:
+        companyProduct:
+          $ref: '#/components/schemas/CompanyProduct'
+        errors:
+          $ref: '#/components/schemas/CompanyProductUpdateValidationError'
+      title: CompanyProduct Update Response
+    CompanyProductUpdateValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        description:
+          type: array
+          items:
+            type: string
+        url:
+          type: array
+          items:
+            type: string
+        logo:
+          type: array
+          items:
+            type: string
+      title: CompanyProduct Update Validation Error
     CompanySignInInput:
       type: object
       required:
