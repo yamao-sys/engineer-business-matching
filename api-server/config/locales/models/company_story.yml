@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      company_story: 企業ストーリー
+    attributes:
+      company_story:
+        mission: ミッション
+        vision: ビジョン
