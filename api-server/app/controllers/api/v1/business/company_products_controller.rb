@@ -2,7 +2,7 @@ class Api::V1::Business::CompanyProductsController < Api::V1::Business::BaseCont
   before_action :business_authenticate
 
   def index
-    render json: Serializer.call(CompanyProductSerializer, @company.company_products)
+    render json: [ Serializer.call(CompanyProductSerializer, @company.company_products) ].flatten
   end
 
   def show
