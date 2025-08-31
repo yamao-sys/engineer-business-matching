@@ -135,7 +135,7 @@ const CompanyProductForm: FC<Props> = ({ product, isNewProduct, onSuccess }) => 
             disabled={isPending}
             borderColor="border-blue-500"
             bgColor="bg-blue-500"
-            label={isPending ? "送信中..." : product && !isNewProduct ? "更新する" : "追加する"}
+            label={isPending ? "送信中..." : "登録する"}
             type="submit"
           />
         </BaseFlexCentralBox>

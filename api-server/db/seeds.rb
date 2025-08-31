@@ -18,9 +18,9 @@ CompanyStory.create!(company: test_company_company_story_4, mission: "test_compa
 
 # NOTE: /company-productsのページのE2Eデータ
 test_company_company_product = Company.create!(name: "test_company_company_product", email: "test_company_company_product@example.com", password: "password")
-test_company_product_1 = CompanyProduct.create!(company: test_company_company_product, name: "test_company_product_1", description: "test_company_product_1_description", url: "http://example.com/1")
-test_company_product_2 = CompanyProduct.create!(company: test_company_company_product, name: "test_company_product_2", description: "test_company_product_2_description", url: "http://example.com/2")
-test_company_product_3 = CompanyProduct.create!(company: test_company_company_product, name: "test_company_product_3", description: "test_company_product_3_description", url: "http://example.com/3")
+test_company_product_1 = CompanyProduct.new(company: test_company_company_product, name: "test_company_product_1", description: "test_company_product_1_description", url: "http://example.com/1")
+test_company_product_2 = CompanyProduct.new(company: test_company_company_product, name: "test_company_product_2", description: "test_company_product_2_description", url: "http://example.com/2")
+test_company_product_3 = CompanyProduct.new(company: test_company_company_product, name: "test_company_product_3", description: "test_company_product_3_description", url: "http://example.com/3")
 File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
   test_company_product_1.logo_attacher.assign(file)
 end
@@ -33,6 +33,31 @@ File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
   test_company_product_3.logo_attacher.assign(file)
 end
 test_company_product_3.save!
+
+Company.create!(name: "test_company_company_product_2", email: "test_company_company_product_2@example.com", password: "password")
+
+Company.create!(name: "test_company_company_product_3", email: "test_company_company_product_3@example.com", password: "password")
+
+test_company_company_product_4 = Company.create!(name: "test_company_company_product_4", email: "test_company_company_product_4@example.com", password: "password")
+test_company_product_4 = CompanyProduct.new(company: test_company_company_product_4, name: "test_company_product_4", description: "test_company_product_4_description", url: "http://example.com/4")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_product_4.logo_attacher.assign(file)
+end
+test_company_product_4.save!
+
+test_company_company_product_5 = Company.create!(name: "test_company_company_product_5", email: "test_company_company_product_5@example.com", password: "password")
+test_company_product_5 = CompanyProduct.new(company: test_company_company_product_5, name: "test_company_product_5", description: "test_company_product_5_description", url: "http://example.com/5")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_product_5.logo_attacher.assign(file)
+end
+test_company_product_5.save!
+
+test_company_company_product_6 = Company.create!(name: "test_company_company_product_6", email: "test_company_company_product_6@example.com", password: "password")
+test_company_product_6 = CompanyProduct.new(company: test_company_company_product_6, name: "test_company_product_6", description: "test_company_product_6_description", url: "http://example.com/6")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_product_6.logo_attacher.assign(file)
+end
+test_company_product_6.save!
 
 Engineer.create!(first_name: "test_engineer_sign_in", last_name: "test_engineer_sign_in", email: "test_engineer_sign_in@example.com", password: "password", birthday: "1990-01-01")
 

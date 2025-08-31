@@ -8,12 +8,11 @@ type Props = {
   onClose: () => void;
   product: CompanyProduct;
   isNewProduct: boolean;
-  isModalOpen: boolean;
 };
 
-const CompanyProductModal: FC<Props> = ({ onClose, product, isNewProduct, isModalOpen }) => {
+const CompanyProductModal: FC<Props> = ({ onClose, product, isNewProduct }) => {
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 ${isModalOpen ? "block" : "hidden"}`}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg border border-gray-200 p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">{isNewProduct ? "プロダクト追加" : "プロダクト編集"}</h2>

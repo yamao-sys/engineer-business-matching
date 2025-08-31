@@ -24,7 +24,6 @@ const CompanyProductRow: FC<Props> = ({ product, deleteMutation }) => {
         return;
       }
       deleteMutation.mutate(product.id);
-      window.alert("プロダクトを削除しました。");
     },
     [deleteMutation],
   );
@@ -60,7 +59,7 @@ const CompanyProductRow: FC<Props> = ({ product, deleteMutation }) => {
         </div>
       </div>
 
-      <CompanyProductModal onClose={() => setIsModalOpen(false)} product={product} isNewProduct={false} isModalOpen={isModalOpen} />
+      {isModalOpen && <CompanyProductModal onClose={() => setIsModalOpen(false)} product={product} isNewProduct={false} />}
     </BaseBox>
   );
 };
