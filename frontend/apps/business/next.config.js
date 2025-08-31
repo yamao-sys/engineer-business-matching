@@ -19,6 +19,18 @@ const nextConfig = {
         port: "4566",
         pathname: "/engineer-business-matching-test/store/**",
       },
+      {
+        protocol: "http",
+        hostname: "localstack",
+        port: "4566",
+        pathname: "/engineer-business-matching-test/store/**",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "4566",
+        pathname: "/engineer-business-matching-test/store/**",
+      },
     ],
   },
 };
