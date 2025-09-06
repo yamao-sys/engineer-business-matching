@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      tech_blog: 技術ブログ
+    attributes:
+      tech_blog:
+        title: タイトル
+        url: URL
+        published_at: 公開日
