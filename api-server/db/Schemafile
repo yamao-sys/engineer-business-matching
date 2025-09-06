@@ -59,3 +59,13 @@ create_table "company_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai
   t.datetime "updated_at", null: false
   t.index [ "company_id" ], name: "index_company_products_on_company_id"
 end
+
+create_table "tech_blogs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  t.bigint "company_id"
+  t.string "url", null: false
+  t.string "title", null: false
+  t.date "published_at", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index [ "company_id" ], name: "index_tech_blogs_on_company_id"
+end
