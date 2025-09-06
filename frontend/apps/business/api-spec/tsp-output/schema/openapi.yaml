@@ -9,6 +9,7 @@ tags:
   - name: CompanyStory
   - name: csrf
   - name: profile
+  - name: TechBlog
 paths:
   /companies/sign-in:
     post:
@@ -351,6 +352,140 @@ paths:
               $ref: '#/components/schemas/ProfileUpdateInput'
       security:
         - BusinessBearerAuth: []
+  /tech-blogs/:
+    get:
+      operationId: get-tech-blogs
+      summary: Fetch TechBlogs
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TechBlog'
+        '500':
+          description: Server error
+      tags:
+        - TechBlog
+      security:
+        - BusinessBearerAuth: []
+    post:
+      operationId: post-tech-blog
+      summary: Create TechBlog
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechBlogUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechBlogUpdateResponse'
+        '500':
+          description: Server error
+      tags:
+        - TechBlog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TechBlogUpdateInput'
+      security:
+        - BusinessBearerAuth: []
+  /tech-blogs/{id}:
+    get:
+      operationId: get-tech-blog
+      summary: Show TechBlog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechBlog'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - TechBlog
+      security:
+        - BusinessBearerAuth: []
+    put:
+      operationId: put-tech-blog
+      summary: Update TechBlog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechBlogUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechBlogUpdateResponse'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - TechBlog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TechBlogUpdateInput'
+      security:
+        - BusinessBearerAuth: []
+    delete:
+      operationId: delete-tech-blog
+      summary: Delete TechBlog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechBlog'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - TechBlog
+      security:
+        - BusinessBearerAuth: []
 components:
   schemas:
     CompanyProduct:
@@ -623,6 +758,66 @@ components:
           items:
             type: string
       title: Profile Update Validation Error
+    TechBlog:
+      type: object
+      required:
+        - id
+        - title
+        - url
+        - publishedAt
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        publishedAt:
+          type: string
+          format: date
+      title: TechBlog
+    TechBlogUpdateInput:
+      type: object
+      required:
+        - title
+        - url
+        - publishedAt
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        publishedAt:
+          type: string
+          format: date
+      title: TechBlogUpdateInput
+    TechBlogUpdateResponse:
+      type: object
+      required:
+        - techBlog
+        - errors
+      properties:
+        techBlog:
+          $ref: '#/components/schemas/TechBlog'
+        errors:
+          $ref: '#/components/schemas/TechBlogUpdateValidationError'
+      title: TechBlog Update Response
+    TechBlogUpdateValidationError:
+      type: object
+      properties:
+        title:
+          type: array
+          items:
+            type: string
+        url:
+          type: array
+          items:
+            type: string
+        publishedAt:
+          type: array
+          items:
+            type: string
+      title: TechBlog Update Validation Error
   securitySchemes:
     BusinessBearerAuth:
       type: apiKey
