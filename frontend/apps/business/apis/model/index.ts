@@ -24,3 +24,7 @@ export * from "./profile";
 export * from "./profileUpdateInput";
 export * from "./profileUpdateResponse";
 export * from "./profileUpdateValidationError";
+export * from "./techBlog";
+export * from "./techBlogUpdateInput";
+export * from "./techBlogUpdateResponse";
+export * from "./techBlogUpdateValidationError";
