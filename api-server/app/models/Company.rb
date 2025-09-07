@@ -6,6 +6,7 @@ class Company < ApplicationRecord
   has_one :company_story, dependent: :destroy
   has_many :company_products, dependent: :destroy
   has_many :tech_blogs, dependent: :destroy
+  has_many :company_members, dependent: :destroy
 
   has_attached_file :final_tax_return
   has_attached_file :logo
