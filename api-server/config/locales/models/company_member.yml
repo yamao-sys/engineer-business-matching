@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      company_member: 企業メンバー
+    attributes:
+      company_member:
+        name: メンバー名
+        position: 役職
+        description: 概要
+        icon: アイコン
