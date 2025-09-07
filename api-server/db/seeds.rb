@@ -77,6 +77,51 @@ TechBlog.create!(company: test_company_tech_blog_5, title: "test_company_tech_bl
 test_company_tech_blog_6 = Company.create!(name: "test_company_tech_blog_6", email: "test_company_tech_blog_6@example.com", password: "password")
 TechBlog.create!(company: test_company_tech_blog_6, title: "test_company_tech_blog_6_title", url: "http://example.com/6", published_at: Date.parse("2024-12-31"))
 
+# NOTE: /company-membersのページのE2Eデータ
+test_company_member = Company.create!(name: "test_company_member", email: "test_company_member@example.com", password: "password")
+test_company_member_1 = CompanyMember.new(company: test_company_member, name: "test_company_member_1_name", position: "test_company_member_1_position", description: "test_company_member_1_description")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_member_1.icon_attacher.assign(file)
+end
+test_company_member_1.save!
+
+test_company_member_2 = CompanyMember.new(company: test_company_member, name: "test_company_member_2_name", position: "test_company_member_2_position", description: "test_company_member_2_description")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_member_2.icon_attacher.assign(file)
+end
+test_company_member_2.save!
+
+test_company_member_3 = CompanyMember.new(company: test_company_member, name: "test_company_member_3_name", position: "test_company_member_3_position", description: "test_company_member_3_description")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_member_3.icon_attacher.assign(file)
+end
+test_company_member_3.save!
+
+Company.create!(name: "test_company_member_2", email: "test_company_member_2@example.com", password: "password")
+
+Company.create!(name: "test_company_member_3", email: "test_company_member_3@example.com", password: "password")
+
+test_company_member_4 = Company.create!(name: "test_company_member_4", email: "test_company_member_4@example.com", password: "password")
+test_company_member_4 = CompanyMember.new(company: test_company_member_4, name: "test_company_member_4_name", position: "test_company_member_4_position", description: "test_company_member_4_description")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_member_4.icon_attacher.assign(file)
+end
+test_company_member_4.save!
+
+test_company_member_5 = Company.create!(name: "test_company_member_5", email: "test_company_member_5@example.com", password: "password")
+test_company_member_5 = CompanyMember.new(company: test_company_member_5, name: "test_company_member_5_name", position: "test_company_member_5_position", description: "test_company_member_5_description")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_member_5.icon_attacher.assign(file)
+end
+test_company_member_5.save!
+
+test_company_member_6 = Company.create!(name: "test_company_member_6", email: "test_company_member_6@example.com", password: "password")
+test_company_member_6 = CompanyMember.new(company: test_company_member_6, name: "test_company_member_6_name", position: "test_company_member_6_position", description: "test_company_member_6_description")
+File.open(Rails.root.join("spec/fixtures/sample.jpg"), "r") do |file|
+  test_company_member_6.icon_attacher.assign(file)
+end
+test_company_member_6.save!
+
 Engineer.create!(first_name: "test_engineer_sign_in", last_name: "test_engineer_sign_in", email: "test_engineer_sign_in@example.com", password: "password", birthday: "1990-01-01")
 
 Engineer.create!(first_name: "test_engineer_profile", last_name: "test_engineer_profile", email: "test_engineer_profile@example.com", password: "password", birthday: "1990-01-01")
