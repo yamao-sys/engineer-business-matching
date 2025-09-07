@@ -5,6 +5,7 @@ info:
   description: business APIs
 tags:
   - name: companies
+  - name: CompanyMember
   - name: CompanyProduct
   - name: CompanyStory
   - name: csrf
@@ -100,6 +101,140 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CompanySignUpInput'
+  /company-members/:
+    get:
+      operationId: get-company-members
+      summary: Fetch CompanyMembers
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyMember'
+        '500':
+          description: Server error
+      tags:
+        - CompanyMember
+      security:
+        - BusinessBearerAuth: []
+    post:
+      operationId: post-company-member
+      summary: Create CompanyMember
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyMemberUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyMemberUpdateResponse'
+        '500':
+          description: Server error
+      tags:
+        - CompanyMember
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanyMemberUpdateInput'
+      security:
+        - BusinessBearerAuth: []
+  /company-members/{id}:
+    get:
+      operationId: get-company-member
+      summary: Show CompanyMember
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyMember'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - CompanyMember
+      security:
+        - BusinessBearerAuth: []
+    put:
+      operationId: put-company-member
+      summary: Update CompanyMember
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyMemberUpdateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyMemberUpdateResponse'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - CompanyMember
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CompanyMemberUpdateInput'
+      security:
+        - BusinessBearerAuth: []
+    delete:
+      operationId: delete-company-member
+      summary: Delete CompanyMember
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyMember'
+        '404':
+          description: The server cannot find the requested resource.
+        '500':
+          description: Server error
+      tags:
+        - CompanyMember
+      security:
+        - BusinessBearerAuth: []
   /company-products/:
     get:
       operationId: get-company-products
@@ -488,6 +623,72 @@ paths:
         - BusinessBearerAuth: []
 components:
   schemas:
+    CompanyMember:
+      type: object
+      required:
+        - id
+        - name
+        - position
+        - description
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        position:
+          type: string
+        description:
+          type: string
+        iconUrl:
+          type: string
+      title: CompanyMember
+    CompanyMemberUpdateInput:
+      type: object
+      properties:
+        name:
+          type: string
+        position:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+          format: binary
+      required:
+        - name
+        - position
+        - description
+    CompanyMemberUpdateResponse:
+      type: object
+      required:
+        - companyMember
+        - errors
+      properties:
+        companyMember:
+          $ref: '#/components/schemas/CompanyMember'
+        errors:
+          $ref: '#/components/schemas/CompanyMemberUpdateValidationError'
+      title: CompanyMember Update Response
+    CompanyMemberUpdateValidationError:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        position:
+          type: array
+          items:
+            type: string
+        description:
+          type: array
+          items:
+            type: string
+        icon:
+          type: array
+          items:
+            type: string
+      title: CompanyMember Update Validation Error
     CompanyProduct:
       type: object
       required:
