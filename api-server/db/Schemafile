@@ -13,6 +13,8 @@ create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", f
   t.text "address"
   t.text "site_url"
   t.integer "employee_count"
+  t.date "established_at"
+  t.text "description"
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
   t.index [ "email" ], name: "index_companies_on_email"
