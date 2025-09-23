@@ -6,7 +6,28 @@ info:
 tags:
   - name: engineers
   - name: profile
+  - name: companies
 paths:
+  /companies:
+    get:
+      operationId: get-companies
+      summary: Show Companies
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+        '500':
+          description: Server error
+      tags:
+        - companies
+      security:
+        - TalentBearerAuth: []
   /engineers/sign-in:
     post:
       operationId: post-engineer-sign-in
@@ -149,6 +170,24 @@ paths:
         - TalentBearerAuth: []
 components:
   schemas:
+    Company:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        logoUrl:
+          type: string
+        description:
+          type: string
+        establishedAt:
+          type: string
+          format: date
+      title: Company
     EngineerSignInInput:
       type: object
       required:
